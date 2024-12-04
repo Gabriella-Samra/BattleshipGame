@@ -12,3 +12,4 @@ C:\Users\Gabbie\Desktop\Projects\BattleshipGame\obj\Debug\net8.0\refint\Battlesh
 C:\Users\Gabbie\Desktop\Projects\BattleshipGame\obj\Debug\net8.0\BattleshipGame.pdb
 C:\Users\Gabbie\Desktop\Projects\BattleshipGame\obj\Debug\net8.0\BattleshipGame.genruntimeconfig.cache
 C:\Users\Gabbie\Desktop\Projects\BattleshipGame\obj\Debug\net8.0\ref\BattleshipGame.dll
+C:\Users\Gabbie\Desktop\Projects\BattleshipGame\obj\Debug\net8.0\BattleshipGame.sourcelink.json
