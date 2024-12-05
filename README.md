@@ -29,18 +29,18 @@ BattleshipGame is a C# implementation of the classic Battleship game. The projec
   - Feedback is provided after each guess (hit or miss).
 
 ## Roadmap
-## Version 1 (V1)
+### Version 1 (V1)
 - **Features:**
   - Basic gameplay with random ship placement.
   - The computer makes random guesses for the player's ship locations.
 - **Goal:** Establish the core mechanics of the game in a terminal environment.
-## Version 2 (V2)
+### Version 2 (V2)
 - **Features:**
   - Improved Computer Intelligence: The computer makes educated guesses after a hit.
   - If the computer hits a ship at a coordinate (e.g., A3), it will next guess adjacent cells (e.g., A4), assuming the ship may occupy multiple spaces.
   - Enhanced user experience with additional feedback and messages.
 - **Goal:** Increase the difficulty and realism of the computer opponent.
-## Version 3 (V3)
+### Version 3 (V3)
 - **Features:**
   - Advanced Computer Strategy: The computer analyzes previous guesses and possible ship placements.
   - Implements tactics to optimize its guesses based on remaining ship sizes and possible orientations.
