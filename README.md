@@ -48,11 +48,11 @@ BattleshipGame is a C# implementation of the classic Battleship game. The projec
 - **Goal:** Provide a challenging experience that requires strategic thinking from the player.
 
 ## Future Plans
-**Graphical User Interface (GUI):**
+- **Graphical User Interface (GUI):**
 - Develop a frontend with custom-designed assets.
 - Enable players to interact with the game visually rather than through the terminal.
-**Multiplayer Support:**
+- **Multiplayer Support:**
 - Allow players to compete against each other locally or over a network.
-**Additional Features:**
+- **Additional Features:**
 - Customizable settings (grid size, number of ships).
 - Sound effects and animations.
