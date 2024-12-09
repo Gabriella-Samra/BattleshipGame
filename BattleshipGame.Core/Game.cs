@@ -23,7 +23,7 @@ namespace BattleshipGame.Core
             Console.WriteLine($"The size of my large boat is {largeBoat.Size}");
             Console.WriteLine($"The size of my medium boat is {mediumBoat.Size}");
             Console.WriteLine($"The size of my small boat is {smallBoat.Size}");
-            string coordinateString = string.Join(", ", gameGrid.GridCoordinates.Select(coord => $"\"{coord.Item1},{coord.Item2}\""));;
+            string coordinateString = string.Join(" || ", gameGrid.GridCoordinates.Select(coord => $"{coord.Item1},{coord.Item2}"));;
             Console.WriteLine($"{coordinateString}");
         }
     }
