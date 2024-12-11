@@ -15,12 +15,12 @@ namespace BattleshipGame.Core
             
             .Take(10)
             .Select(coord => $"{coord.Item1},{coord.Item2}"));
+            
+            // refactor the below to wrap in a method that repeats itself till we have all printed
 
             result += "\n";
             result += string.Join(" || ", gameGrid.GridCoordinates
 
-            // refactor the below to wrap in a method that repeats itself till we have all printed
-            
             .Skip(10)
             .Take(10)
             .Select(coord => $"{coord.Item1},{coord.Item2}"));
