@@ -6,24 +6,23 @@ using System.Threading.Tasks;
 
 namespace BattleshipGame.Core
 {
-    public class Boat( string make, int size)
+    public class Boat(string make)
     {        
         public string Make { get; set; } = make;
-        public int Size { get; set; } = size;
 
-        public static int BoatLength(string type)
+        public int BoatLength()
         {
-            if( type == "Large")
+            if(make == "Large")
             {
                 return 3;
             }
 
-            if( type == "Medium")
+            if(make == "Medium")
             {
                 return 2;
             }
 
-            if( type == "Small")
+            if(make == "Small")
             {
                 return 1;
             }

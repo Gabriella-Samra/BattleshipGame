@@ -16,13 +16,13 @@ namespace BattleshipGame.Core
             Console.WriteLine($"The Grid Height is {gameGrid.Height}");
             Console.WriteLine($"The Grid Height is {gameGrid.Width}");
 
-            var largeBoat = new Boat("Large", Boat.BoatLength("Large"));
-            var mediumBoat = new Boat("Medium", Boat.BoatLength("Medium"));
-            var smallBoat = new Boat("Small", Boat.BoatLength("Small"));
+            var largeBoat = new Boat("Large");
+            var mediumBoat = new Boat("Medium");
+            var smallBoat = new Boat("Small");
 
-            Console.WriteLine($"The size of my large boat is {largeBoat.Size}");
-            Console.WriteLine($"The size of my medium boat is {mediumBoat.Size}");
-            Console.WriteLine($"The size of my small boat is {smallBoat.Size}");
+            Console.WriteLine($"The size of my large boat is {largeBoat.BoatLength()}");
+            Console.WriteLine($"The size of my medium boat is {mediumBoat.BoatLength()}");
+            Console.WriteLine($"The size of my small boat is {smallBoat.BoatLength()}");
             string coordinateString = string.Join(" || ", gameGrid.GridCoordinates.Select(coord => $"{coord.Item1},{coord.Item2}"));;
             Console.WriteLine($"{coordinateString}");
         }
