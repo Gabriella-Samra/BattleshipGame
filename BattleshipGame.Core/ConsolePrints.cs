@@ -15,75 +15,18 @@ namespace BattleshipGame.Core
             
             .Take(10)
             .Select(coord => $"{coord.Item1},{coord.Item2}"));
-            
-            // refactor the below to wrap in a method that repeats itself till we have all printed
 
-            result += "\n";
-            result += string.Join(" || ", gameGrid.GridCoordinates
+            for (int i = 10; i < gameGrid.GridCoordinates.Count; i += 10)
+            {
+                result += Environment.NewLine;
+                result += string.Join(" || ", gameGrid.GridCoordinates
 
-            .Skip(10)
-            .Take(10)
-            .Select(coord => $"{coord.Item1},{coord.Item2}"));
-
-            result += "\n";
-            result += string.Join(" || ", gameGrid.GridCoordinates
-            
-            .Skip(20)
-            .Take(10)
-            .Select(coord => $"{coord.Item1},{coord.Item2}"));
-
-            result += "\n";
-            result += string.Join(" || ", gameGrid.GridCoordinates
-            
-            .Skip(30)
-            .Take(10)
-            .Select(coord => $"{coord.Item1},{coord.Item2}"));
-
-            result += "\n";
-            result += string.Join(" || ", gameGrid.GridCoordinates
-            
-            .Skip(40)
-            .Take(10)
-            .Select(coord => $"{coord.Item1},{coord.Item2}"));
-
-            result += "\n";
-            result += string.Join(" || ", gameGrid.GridCoordinates
-            
-            .Skip(50)
-            .Take(10)
-            .Select(coord => $"{coord.Item1},{coord.Item2}"));
-
-            result += "\n";
-            result += string.Join(" || ", gameGrid.GridCoordinates
-            
-            .Skip(60)
-            .Take(10)
-            .Select(coord => $"{coord.Item1},{coord.Item2}"));
-
-            result += "\n";
-            result += string.Join(" || ", gameGrid.GridCoordinates
-            
-            .Skip(70)
-            .Take(10)
-            .Select(coord => $"{coord.Item1},{coord.Item2}"));
-
-            result += "\n";
-            result += string.Join(" || ", gameGrid.GridCoordinates
-            
-            .Skip(80)
-            .Take(10)
-            .Select(coord => $"{coord.Item1},{coord.Item2}"));
-
-            result += "\n";
-            result += string.Join(" || ", gameGrid.GridCoordinates
-            
-            .Skip(90)
-            .Take(10)
-            .Select(coord => $"{coord.Item1},{coord.Item2}"));
+                .Skip(i)
+                .Take(10)
+                .Select(coord => $"{coord.Item1},{coord.Item2}"));
+            }
 
             return result;
         }
-
-
     }
 }

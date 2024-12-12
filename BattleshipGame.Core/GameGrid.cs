@@ -5,23 +5,24 @@ using System.Threading.Tasks;
 
 namespace BattleshipGame.Core
 {
-    public class GameGrid(int width = 10, int height = 10)
+    public class GameGrid
     {
-        public int Width { get; } = width;
-        public int Height { get; } = height;
-        public List<(int, int)> GridCoordinates { get; } = new List<(int, int)>();
-
-        public List<(int ,int)> Coordinates(int gridXLength, int gridYLength)
+        public int Width { get; }
+        public int Height { get; }
+        public List<(int, int)> GridCoordinates { get; } = new();
+        public GameGrid(int width = 10, int height = 10)
         {
-            for (int x = 0; x < gridXLength; x++)
+            Width = width;
+            Height = height;
+
+            // Populate the grid coordinates
+            for (int x = 0; x < Width; x++)
             {
-                for (int y = 0; y < gridYLength; y++)
+                for (int y = 0; y < Height; y++)
                 {
                     GridCoordinates.Add((x, y));
                 }
             }
-            return GridCoordinates;
         }
-        
     }
 }

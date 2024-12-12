@@ -11,7 +11,6 @@ namespace BattleshipGame.Core
         {
             Console.WriteLine("Game Starting");
             var gameGrid = new GameGrid();
-            gameGrid.Coordinates(gameGrid.Width, gameGrid.Height);
             Console.WriteLine("Initial Grid:");
             Console.WriteLine($"The Grid Height is {gameGrid.Height}");
             Console.WriteLine($"The Grid Height is {gameGrid.Width}");
