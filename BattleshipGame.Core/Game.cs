@@ -12,8 +12,8 @@ namespace BattleshipGame.Core
             Console.WriteLine("Game Starting");
             var gameGrid = new GameGrid();
             Console.WriteLine("Initial Grid:");
-            Console.WriteLine($"The Grid Height is {gameGrid.Height}");
-            Console.WriteLine($"The Grid Height is {gameGrid.Width}");
+            Console.WriteLine($"The Grid Height is {gameGrid.YAxis}");
+            Console.WriteLine($"The Grid Height is {gameGrid.XAxis}");
 
             var largeBoat = new Boat("Large");
             var mediumBoat = new Boat("Medium");
@@ -23,6 +23,8 @@ namespace BattleshipGame.Core
             Console.WriteLine($"The size of my medium boat is {mediumBoat.BoatLength()}");
             Console.WriteLine($"The size of my small boat is {smallBoat.BoatLength()}");
             Console.WriteLine($"{ConsolePrints.InitialGridPrint(gameGrid)}");
+
+            largeBoat.SetBoatOnGrid(largeBoat, gameGrid);
         }
     }
 }

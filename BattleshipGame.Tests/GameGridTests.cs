@@ -11,7 +11,7 @@ namespace BattleshipGame.Tests
         {
             var gameGrid = new GameGrid(20, 20);
 
-            Assert.That(gameGrid.Width == 20 && gameGrid.Height == 20);
+            Assert.That(gameGrid.XAxis == 20 && gameGrid.YAxis == 20);
         }
     }
 }
