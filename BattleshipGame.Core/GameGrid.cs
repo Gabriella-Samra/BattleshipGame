@@ -24,5 +24,20 @@ namespace BattleshipGame.Core
                 }
             }
         }
+
+        public static bool IsCoordinatesOnGrid((int, int) coordinates, GameGrid gameGrid)
+        {
+            if (coordinates.Item1 < 0 || coordinates.Item1 > gameGrid.XAxis )
+            {
+                return false;
+            }
+
+            if (coordinates.Item2 < 0 || coordinates.Item2 > gameGrid.YAxis)
+            {
+                return false;
+            }
+
+            return true;
+        }
     }
 }

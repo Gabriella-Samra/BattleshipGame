@@ -47,16 +47,16 @@ namespace BattleshipGame.Core
             return coordinate;
         }
 
-        public static bool IsCoordinateAlreadyAssigned(List<Boat> boatList, (int, int) startingCoordinate)
+        public static bool IsCoordinateNotAlreadyAssigned(List<Boat> boatList, (int, int) startingCoordinate)
         {
             foreach (var boat in boatList)
             {
                 if (boat.BoatCoordinates.Contains(startingCoordinate))
                 {
-                    return true;
+                    return false;
                 }
             }
-            return false;
+            return true;
         }
     }
 }
