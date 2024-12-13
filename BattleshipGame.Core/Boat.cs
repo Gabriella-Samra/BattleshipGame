@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Net.WebSockets;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 
@@ -42,15 +43,18 @@ namespace BattleshipGame.Core
         //     }
         // }
 
-        public void GenerateCoorindates(Boat boatInstance, GameGrid gameGrid)
+        public static (int, int) GenerateCoorindates(GameGrid gameGrid)
         {
             // Random needs instanced data
             var random = new Random();
 
             int xCoordinate = random.Next(0, gameGrid.XAxis);
             int yCoordinate = random.Next(0, gameGrid.YAxis);
-            boatInstance.BoatCoordinates.Add((xCoordinate, yCoordinate));
+            (int, int) coordinate = (xCoordinate, yCoordinate) ;
+
             Console.WriteLine($"The x coord is {xCoordinate}, the y coord is {yCoordinate}");
+
+            return coordinate;
         }
 
         public static bool IsCoordinateAlreadyAssigned(List<Boat> boatList, (int, int) startingCoordinate)
