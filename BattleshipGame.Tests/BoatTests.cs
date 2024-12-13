@@ -14,5 +14,9 @@ namespace BattleshipGame.Tests
 
             Assert.IsNotNull(boatLength == 2);
         }
+
+            // Should be a test below:
+            // var shouldBeFalse = Boat.IsCoordinateAlreadyAssigned(boatList, (0,1));
+            // Console.WriteLine(shouldBeFalse);
     }
 }

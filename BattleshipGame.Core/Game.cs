@@ -7,14 +7,11 @@ namespace BattleshipGame.Core
 {
     public class Game
     {
-        public static void Main()
+        public static void GameInitialiser()
         {
-            Console.WriteLine("Game Starting");
+            Console.WriteLine("Game Starting...Grid Loading");
             var gameGrid = new GameGrid();
             var boatList = new List<Boat>{};
-            Console.WriteLine("Initial Grid:");
-            Console.WriteLine($"The Grid Height is {gameGrid.YAxis}");
-            Console.WriteLine($"The Grid Height is {gameGrid.XAxis}");
 
             var largeBoat = new Boat("Large");
             boatList.Add(largeBoat);
@@ -23,16 +20,7 @@ namespace BattleshipGame.Core
             var smallBoat = new Boat("Small");
             boatList.Add(smallBoat);
 
-            Console.WriteLine($"The size of my large boat is {largeBoat.BoatLength()}");
-            Console.WriteLine($"The size of my medium boat is {mediumBoat.BoatLength()}");
-            Console.WriteLine($"The size of my small boat is {smallBoat.BoatLength()}");
             Console.WriteLine($"{ConsolePrints.InitialGridPrint(gameGrid)}");
-
-            // largeBoat.SetBoatOnGrid(largeBoat, gameGrid);
-            
-            // Should be a test below:
-            var shouldBeFalse = Boat.IsCoordinateAlreadyAssigned(boatList, (0,1));
-            Console.WriteLine(shouldBeFalse);
             
         }
     }

@@ -33,16 +33,6 @@ namespace BattleshipGame.Core
             return 0;
         }
 
-        // public void SetBoatOnGrid(Boat boatInstance, GameGrid gameGrid)
-        // {
-        //     int numberOfCoordinatesNeeded = boatInstance.BoatLength();
-
-        //     for(int i = 0; i < numberOfCoordinatesNeeded; i++)
-        //     {
-        //         GenerateCoorindates(boatInstance, gameGrid);
-        //     }
-        // }
-
         public static (int, int) GenerateCoorindates(GameGrid gameGrid)
         {
             // Random needs instanced data
