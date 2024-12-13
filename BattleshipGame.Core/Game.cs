@@ -28,7 +28,12 @@ namespace BattleshipGame.Core
             Console.WriteLine($"The size of my small boat is {smallBoat.BoatLength()}");
             Console.WriteLine($"{ConsolePrints.InitialGridPrint(gameGrid)}");
 
-            largeBoat.SetBoatOnGrid(largeBoat, gameGrid);
+            // largeBoat.SetBoatOnGrid(largeBoat, gameGrid);
+            
+            // Should be a test below:
+            var shouldBeFalse = Boat.IsCoordinateAlreadyAssigned(boatList, (0,1));
+            Console.WriteLine(shouldBeFalse);
+            
         }
     }
 }

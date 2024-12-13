@@ -32,15 +32,15 @@ namespace BattleshipGame.Core
             return 0;
         }
 
-        public void SetBoatOnGrid(Boat boatInstance, GameGrid gameGrid)
-        {
-            int numberOfCoordinatesNeeded = boatInstance.BoatLength();
+        // public void SetBoatOnGrid(Boat boatInstance, GameGrid gameGrid)
+        // {
+        //     int numberOfCoordinatesNeeded = boatInstance.BoatLength();
 
-            for(int i = 0; i < numberOfCoordinatesNeeded; i++)
-            {
-                GenerateCoorindates(boatInstance, gameGrid);
-            }
-        }
+        //     for(int i = 0; i < numberOfCoordinatesNeeded; i++)
+        //     {
+        //         GenerateCoorindates(boatInstance, gameGrid);
+        //     }
+        // }
 
         public void GenerateCoorindates(Boat boatInstance, GameGrid gameGrid)
         {
@@ -51,6 +51,18 @@ namespace BattleshipGame.Core
             int yCoordinate = random.Next(0, gameGrid.YAxis);
             boatInstance.BoatCoordinates.Add((xCoordinate, yCoordinate));
             Console.WriteLine($"The x coord is {xCoordinate}, the y coord is {yCoordinate}");
+        }
+
+        public static bool IsCoordinateAlreadyAssigned(List<Boat> boatList, (int, int) startingCoordinate)
+        {
+            foreach (var boat in boatList)
+            {
+                if (boat.BoatCoordinates.Contains(startingCoordinate))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }
