@@ -25,53 +25,20 @@ namespace BattleshipGame.Core
 
         }
         
-    // TODO: Code is not finished. Currently we get to knowing where all the paths lead but we need to know which path to take. 
-    // TODO: Huge refactor needed of this code from here! Remove the repetative stuff. Create separate methods for things.
-    // TODO: Consider boat size logic in the refactoring so it isn't a separate set of instructions for each but rather look at the number of coordinates needed to make a decision
-    // TODO: Make a new class where a lot of these coordinate methods move to as they don't belong here OR add to Boat.cs as there are coordinate stuff there already
         public static void CoordinateAssignmentForComputerBoats(GameGrid gameGrid, List<Boat> boatList)
         {
-            // -- Small Boat Logic
-            var starterCoordinate = Boat.GenerateCoorindates(gameGrid);
-            
-            while (Boat.IsCoordinateNotAlreadyAssigned(boatList, starterCoordinate))
+            foreach(var boat in boatList)
             {
-                starterCoordinate = Boat.GenerateCoorindates(gameGrid);
+                var starterCoordinate = Boat.GenerateCoorindates(gameGrid);
+                int numberOfCoordinatesStillNeeded = boat.BoatLength();
+
+                while (numberOfCoordinatesStillNeeded > 0)
+                {
+                    var checkedStarterCoordinate = Boat.ReceiveACheckedCoordinate(gameGrid, boatList, starterCoordinate);
+                    boat.BoatCoordinates.Add(checkedStarterCoordinate);
+                    numberOfCoordinatesStillNeeded --; // Removes 1 from the count
+                }
             }
-
-            var smallBoat = boatList.Find(boat => boat.Make == "Small");
-
-            if (smallBoat != null)
-            {
-                smallBoat.BoatCoordinates.Add(starterCoordinate);
-            }
-
-            // -- Medium Boat Logic
-
-            starterCoordinate = Boat.GenerateCoorindates(gameGrid);
-
-            while (Boat.IsCoordinateNotAlreadyAssigned(boatList, starterCoordinate))
-            {
-                starterCoordinate = Boat.GenerateCoorindates(gameGrid);
-            }
-
-            var mediumBoat = boatList.Find(boat => boat.Make == "Medium");
-
-            if (mediumBoat != null)
-            {
-                mediumBoat.BoatCoordinates.Add(starterCoordinate);
-            }
-
-            int numberOfCoordinatesStillNeeded = mediumBoat.BoatLength() - 1;
-
-            if (numberOfCoordinatesStillNeeded > 0)
-            {
-
-            }
-
-
-            // -- Large Boat Logic - TD
-
         }
 
         public void AddAdditionalCoordinatesToBoats((int, int) starterCoordinate, List<Boat> boatList, GameGrid gameGrid)
@@ -84,10 +51,10 @@ namespace BattleshipGame.Core
 
             (int, int) bottomMovingYCoordinate = (starterCoordinate.Item1, starterCoordinate.Item2 + 1);
 
-            var LeftPath = Boat.IsCoordinateNotAlreadyAssigned(boatList, leftMovingXCoordinate);
-            var RightPath = Boat.IsCoordinateNotAlreadyAssigned(boatList, rightMovingXCoordinate);
-            var UpPath = Boat.IsCoordinateNotAlreadyAssigned(boatList, upMovingYCoordinate);
-            var DownPath = Boat.IsCoordinateNotAlreadyAssigned(boatList, bottomMovingYCoordinate);
+            var LeftPath = Boat.IsCoordinateAssigned(boatList, leftMovingXCoordinate);
+            var RightPath = Boat.IsCoordinateAssigned(boatList, rightMovingXCoordinate);
+            var UpPath = Boat.IsCoordinateAssigned(boatList, upMovingYCoordinate);
+            var DownPath = Boat.IsCoordinateAssigned(boatList, bottomMovingYCoordinate);
 
             if (GameGrid.IsCoordinatesOnGrid(leftMovingXCoordinate, gameGrid) == false)
             {
