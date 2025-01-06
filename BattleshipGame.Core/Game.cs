@@ -33,11 +33,17 @@ namespace BattleshipGame.Core
                 var starterCoordinate = Boat.GenerateCoorindates(gameGrid);
                 int numberOfCoordinatesStillNeeded = boat.BoatLength();
 
+                var checkedStarterCoordinate = Boat.ReceiveACheckedAssignedCoordinate(gameGrid, boatList, starterCoordinate);
+                boat.BoatCoordinates.Add(checkedStarterCoordinate);
+                numberOfCoordinatesStillNeeded --;
+                Console.WriteLine($"The Coordinate for {boat.Make} is ({checkedStarterCoordinate.Item1}, {checkedStarterCoordinate.Item2})");
+
                 while (numberOfCoordinatesStillNeeded > 0)
                 {
-                    var checkedStarterCoordinate = Boat.ReceiveACheckedCoordinate(gameGrid, boatList, starterCoordinate);
+                    checkedStarterCoordinate = AddAdditionalCoordinatesToBoats(checkedStarterCoordinate, boatList, gameGrid);
                     boat.BoatCoordinates.Add(checkedStarterCoordinate);
                     numberOfCoordinatesStillNeeded --; // Removes 1 from the count
+                    Console.WriteLine($"The Coordinate for {boat.Make} is ({checkedStarterCoordinate.Item1}, {checkedStarterCoordinate.Item2})");
                 }
             }
         }

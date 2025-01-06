@@ -42,8 +42,6 @@ namespace BattleshipGame.Core
             int yCoordinate = random.Next(0, gameGrid.YAxis);
             (int, int) coordinate = (xCoordinate, yCoordinate) ;
 
-            Console.WriteLine($"The x coord is {xCoordinate}, the y coord is {yCoordinate}");
-
             return coordinate;
         }
 
@@ -59,7 +57,7 @@ namespace BattleshipGame.Core
             return false;
         }
 
-        public static (int, int) ReceiveACheckedCoordinate(GameGrid gameGrid, List<Boat> boatList, (int, int) starterCoordinate) 
+        public static (int, int) ReceiveACheckedAssignedCoordinate(GameGrid gameGrid, List<Boat> boatList, (int, int) starterCoordinate) 
         {   
             while (Boat.IsCoordinateAssigned(boatList, starterCoordinate))
             {
