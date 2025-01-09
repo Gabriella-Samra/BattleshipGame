@@ -14,7 +14,7 @@ namespace BattleshipGame.Core
             string result = string.Join(" || ", gameGrid.GridCoordinates
             
             .Take(10)
-            .Select(coord => $"{coord.Item1},{coord.Item2}"));
+            .Select(coord => $"{coord.X},{coord.Y}"));
 
             for (int i = 10; i < gameGrid.GridCoordinates.Count; i += 10)
             {
@@ -23,7 +23,7 @@ namespace BattleshipGame.Core
 
                 .Skip(i)
                 .Take(10)
-                .Select(coord => $"{coord.Item1},{coord.Item2}"));
+                .Select(coord => $"{coord.X},{coord.Y}"));
             }
 
             return result;

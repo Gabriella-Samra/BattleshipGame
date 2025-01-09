@@ -11,7 +11,9 @@ namespace BattleshipGame.Core
         {
             Console.WriteLine("Game Loading");
 
-            Game.GameInitialiser();
+            var gameInstance = new Game();
+
+            gameInstance.GameInitialiser();
 
         }
     }

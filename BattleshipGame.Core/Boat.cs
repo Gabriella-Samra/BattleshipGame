@@ -9,23 +9,23 @@ using System.Threading.Tasks;
 namespace BattleshipGame.Core
 {
     public class Boat(string make)
-    {        
+    {
         public string Make { get; set; } = make;
-        public List<(int, int)> BoatCoordinates { get; set; } = new List<(int, int)>();
+        public List<Coordinate> BoatCoordinates { get; set; } = new List<Coordinate>();
 
         public int BoatLength()
         {
-            if(make == "Large")
+            if (make == "Large")
             {
                 return 3;
             }
 
-            if(make == "Medium")
+            if (make == "Medium")
             {
                 return 2;
             }
 
-            if(make == "Small")
+            if (make == "Small")
             {
                 return 1;
             }
@@ -33,23 +33,13 @@ namespace BattleshipGame.Core
             return 0;
         }
 
-        public static (int, int) GenerateCoorindates(GameGrid gameGrid)
+        public static bool IsCoordinateAssigned(List<Boat> boatList, Coordinate coordinate)
         {
-            // Random needs instanced data
-            var random = new Random();
-
-            int xCoordinate = random.Next(0, gameGrid.XAxis);
-            int yCoordinate = random.Next(0, gameGrid.YAxis);
-            (int, int) coordinate = (xCoordinate, yCoordinate) ;
-
-            return coordinate;
-        }
-
-        public static bool IsCoordinateAssigned(List<Boat> boatList, (int, int) startingCoordinate)
-        {
+            Console.WriteLine($"Coordinate in IsCoordinateAssigned method testing for is {coordinate}");
             foreach (var boat in boatList)
             {
-                if (boat.BoatCoordinates.Contains(startingCoordinate))
+                var match = boat.BoatCoordinates.Find(coordinateInList => coordinateInList.X == coordinate.X && coordinateInList.Y == coordinate.Y);
+                if (match != null)
                 {
                     return true;
                 }
@@ -57,11 +47,11 @@ namespace BattleshipGame.Core
             return false;
         }
 
-        public static (int, int) ReceiveACheckedAssignedCoordinate(GameGrid gameGrid, List<Boat> boatList, (int, int) starterCoordinate) 
-        {   
+        public static Coordinate ReceiveACheckedAssignedCoordinate(GameGrid gameGrid, List<Boat> boatList, Coordinate starterCoordinate)
+        {
             while (Boat.IsCoordinateAssigned(boatList, starterCoordinate))
             {
-                starterCoordinate = Boat.GenerateCoorindates(gameGrid);
+                starterCoordinate = Coordinate.GenerateCoorindate(gameGrid);
             }
             return starterCoordinate;
         }

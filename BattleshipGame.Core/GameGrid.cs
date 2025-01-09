@@ -9,30 +9,30 @@ namespace BattleshipGame.Core
     {
         public int XAxis { get; }
         public int YAxis { get; }
-        public List<(int, int)> GridCoordinates { get; } = new();
+        public List<Coordinate> GridCoordinates { get; } = new();
         public GameGrid(int width = 10, int height = 10)
         {
             XAxis = width;
             YAxis = height;
 
             // Populate the grid coordinates
-            for (int x = 0; x < XAxis; x++)
+            for (int y = 0; y < YAxis; y++)
             {
-                for (int y = 0; y < YAxis; y++)
+                for (int x = 0; x < XAxis; x++)
                 {
-                    GridCoordinates.Add((x, y));
+                    GridCoordinates.Add(new Coordinate(x, y));
                 }
             }
         }
 
-        public static bool IsCoordinatesOnGrid((int, int) coordinates, GameGrid gameGrid)
+        public static bool IsCoordinatesOnGrid(Coordinate coordinates, GameGrid gameGrid)
         {
-            if (coordinates.Item1 < 0 || coordinates.Item1 > gameGrid.XAxis )
+            if (coordinates.X < 0 || coordinates.X > gameGrid.XAxis )
             {
                 return false;
             }
 
-            if (coordinates.Item2 < 0 || coordinates.Item2 > gameGrid.YAxis)
+            if (coordinates.Y < 0 || coordinates.Y > gameGrid.YAxis)
             {
                 return false;
             }

@@ -9,7 +9,7 @@ namespace BattleshipGame.Core
 {
     public class Game
     {
-        public static void GameInitialiser()
+        public void GameInitialiser()
         {
             Console.WriteLine("Game Starting...Grid Loading");
             var gameGrid = new GameGrid();
@@ -26,91 +26,89 @@ namespace BattleshipGame.Core
             CoordinateAssignmentForComputerBoats(gameGrid, boatList);
         }
         
-        public static void CoordinateAssignmentForComputerBoats(GameGrid gameGrid, List<Boat> boatList)
+        public void CoordinateAssignmentForComputerBoats(GameGrid gameGrid, List<Boat> boatList)
         {
             foreach(var boat in boatList)
             {
-                var starterCoordinate = Boat.GenerateCoorindates(gameGrid);
-                int numberOfCoordinatesStillNeeded = boat.BoatLength();
-
-                var checkedStarterCoordinate = Boat.ReceiveACheckedAssignedCoordinate(gameGrid, boatList, starterCoordinate);
-                boat.BoatCoordinates.Add(checkedStarterCoordinate);
-                numberOfCoordinatesStillNeeded --;
-                Console.WriteLine($"The Coordinate for {boat.Make} is ({checkedStarterCoordinate.Item1}, {checkedStarterCoordinate.Item2})");
-
-                while (numberOfCoordinatesStillNeeded > 0)
-                {
-                    checkedStarterCoordinate = AddAdditionalCoordinatesToBoats(checkedStarterCoordinate, boatList, gameGrid);
-                    boat.BoatCoordinates.Add(checkedStarterCoordinate);
-                    numberOfCoordinatesStillNeeded --; // Removes 1 from the count
-                    Console.WriteLine($"The Coordinate for {boat.Make} is ({checkedStarterCoordinate.Item1}, {checkedStarterCoordinate.Item2})");
-                }
+                var numberOfCoordinatesStillNeeded = boat.BoatLength();
+                var loopCount = 0;
+                CoordinateAssignmentLoop(gameGrid, boatList, numberOfCoordinatesStillNeeded, loopCount, boat);
             }
         }
 
-        // TODO: Need to assign Coordindates that are next to each other only when within a boat.
-
-        public static (int, int) AddAdditionalCoordinatesToBoats((int, int) starterCoordinate, List<Boat> boatList, GameGrid gameGrid)
+        public void CoordinateAssignmentLoop(GameGrid gameGrid, List<Boat> boatList, int numberOfCoordinatesStillNeeded, int loopCount, Boat boat)
         {
+            string pathDirection = "";
+            var checkedStarterCoordinate = GenerateStarterCoordinate(gameGrid, boatList, boat);
+            RemainderCoordinatesGenerator(gameGrid, boatList, boat, checkedStarterCoordinate, pathDirection, numberOfCoordinatesStillNeeded - 1, loopCount + 1);
+        }
 
-        // TODO: Could refactor the below to use a Dictionary instead to make it more concise and then wrap the 2 checks in a foreach loop around all the options in the dictionary
-
-            (int, int) leftMovingXCoordinate = (starterCoordinate.Item1 - 1, starterCoordinate.Item2);
-
-            (int, int) rightMovingXCoordinate = (starterCoordinate.Item1 + 1, starterCoordinate.Item2);
-
-            (int, int) upMovingYCoordinate = (starterCoordinate.Item1, starterCoordinate.Item2 - 1);
-
-            (int, int) downMovingYCoordinate = (starterCoordinate.Item1, starterCoordinate.Item2 + 1);
-
-            var LeftPath = !Boat.IsCoordinateAssigned(boatList, leftMovingXCoordinate); // if the coord is assigned then this is true then flipped to false
-            var RightPath = !Boat.IsCoordinateAssigned(boatList, rightMovingXCoordinate);
-            var UpPath = !Boat.IsCoordinateAssigned(boatList, upMovingYCoordinate);
-            var DownPath = !Boat.IsCoordinateAssigned(boatList, downMovingYCoordinate);
-
-            if (GameGrid.IsCoordinatesOnGrid(leftMovingXCoordinate, gameGrid) == false) LeftPath = false;
-            if (GameGrid.IsCoordinatesOnGrid(rightMovingXCoordinate, gameGrid) == false) RightPath = false;
-            if (GameGrid.IsCoordinatesOnGrid(upMovingYCoordinate, gameGrid) == false) UpPath = false;
-            if (GameGrid.IsCoordinatesOnGrid(downMovingYCoordinate, gameGrid) == false) DownPath = false;
-
-            List<string> availablePaths = new List<string>();
-
-            if (LeftPath == true) availablePaths.Add("LeftPath");
-            if (RightPath == true) availablePaths.Add("RightPath");
-            if (UpPath == true) availablePaths.Add("UpPath");
-            if (DownPath == true) availablePaths.Add("DownPath");
-
-            if (availablePaths.Count == 0)
+        public Coordinate GenerateStarterCoordinate(GameGrid gameGrid, List<Boat> boatList, Boat boat)
+        {         
+            var starterCoordinate = Coordinate.GenerateCoorindate(gameGrid);
+            var checkedStarterCoordinate = Boat.ReceiveACheckedAssignedCoordinate(gameGrid, boatList, starterCoordinate);
+            boat.BoatCoordinates.Add(checkedStarterCoordinate);
+            Console.WriteLine($"The Coordinate for {boat.Make} is ({checkedStarterCoordinate.X}, {checkedStarterCoordinate.Y})");
+            return checkedStarterCoordinate;
+        }
+            
+        public void RemainderCoordinatesGenerator(GameGrid gameGrid, List<Boat> boatList, Boat boat, Coordinate checkedStarterCoordinate, string pathDirection, 
+            int numberOfCoordinatesStillNeeded, int loopCount)
+        {
+            while (numberOfCoordinatesStillNeeded > 0)
             {
-                return (-1, -1); // returning a negative coord means a new starter coord needs to be rolled for
-            }
-            else if (availablePaths.Count == 1)
-            {
-                var chosenPath = availablePaths[1];
-
-                return chosenPath switch
+                if(loopCount < 2)
                 {
-                    "LeftPath" => leftMovingXCoordinate,
-                    "RightPath" => rightMovingXCoordinate,
-                    "UpPath" => upMovingYCoordinate,
-                    "DownPath" => downMovingYCoordinate,
-                    _ => (-1, -1)
-                };
-            }
-            else
-            {
-                Random random = new Random();
-                string chosenPath = availablePaths[random.Next(availablePaths.Count)];
+                    var CoordinatesDto = BoatCoordinateAssigner.AddAdditionalCoordinatesToBoats(checkedStarterCoordinate, boatList, gameGrid, pathDirection);
 
-                return chosenPath switch
+                    if (CoordinatesDto.PathDirection == "no path")
+                    {
+                        boat.BoatCoordinates.Clear();
+                        loopCount = 0;           
+                        numberOfCoordinatesStillNeeded = boat.BoatLength();
+                        CoordinateAssignmentLoop(gameGrid, boatList, numberOfCoordinatesStillNeeded, loopCount, boat);
+                    }
+
+                    else
+                    {
+                        var checkedStarterCoordinateItem1 = CoordinatesDto.Coordinate.X;
+                        var checkedStarterCoordinateItem2 = CoordinatesDto.Coordinate.Y;
+                        pathDirection = CoordinatesDto.PathDirection;
+                        
+                        checkedStarterCoordinate = new Coordinate(checkedStarterCoordinateItem1, checkedStarterCoordinateItem2);
+                        boat.BoatCoordinates.Add(checkedStarterCoordinate);
+                        numberOfCoordinatesStillNeeded --; // Removes 1 from the count
+                        Console.WriteLine($"The Coordinate for {boat.Make} is ({checkedStarterCoordinate.X}, {checkedStarterCoordinate.Y}, the direction is {pathDirection})");
+                    }
+                }
+                else
                 {
-                    "LeftPath" => leftMovingXCoordinate,
-                    "RightPath" => rightMovingXCoordinate,
-                    "UpPath" => upMovingYCoordinate,
-                    "DownPath" => downMovingYCoordinate,
-                    _ => (-1, -1)
-                };
+                    var CoordinatesDto = BoatCoordinateAssigner.AddAdditionalCoordinatesToBoats(checkedStarterCoordinate, boatList, gameGrid, pathDirection);
+                    var checkedStarterCoordinateItem1 = CoordinatesDto.Coordinate.X;
+                    var checkedStarterCoordinateItem2 = CoordinatesDto.Coordinate.Y;
+                    pathDirection = CoordinatesDto.PathDirection;
+
+                    if (CoordinatesDto.PathDirection == "no path")
+                    {
+                        boat.BoatCoordinates.Clear();
+                        loopCount = 0;           
+                        numberOfCoordinatesStillNeeded = boat.BoatLength();
+                        CoordinateAssignmentLoop(gameGrid, boatList, numberOfCoordinatesStillNeeded, loopCount, boat);
+                    }
+
+                    else
+                    {
+                        checkedStarterCoordinate = new Coordinate(checkedStarterCoordinateItem1, checkedStarterCoordinateItem2);
+                        boat.BoatCoordinates.Add(checkedStarterCoordinate);
+                        numberOfCoordinatesStillNeeded --; // Removes 1 from the count
+                        Console.WriteLine($"The Coordinate for {boat.Make} is ({checkedStarterCoordinate.X}, {checkedStarterCoordinate.Y}, the direction is {pathDirection})");
+                    }
+                }
+
+                loopCount ++;
             }
         }
+
+        // TODO: Need to assign Coordindates that are next to each other only when within a boat.     
     }
 }
