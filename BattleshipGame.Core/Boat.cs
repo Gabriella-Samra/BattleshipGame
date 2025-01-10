@@ -35,7 +35,6 @@ namespace BattleshipGame.Core
 
         public static bool IsCoordinateAssigned(List<Boat> boatList, Coordinate coordinate)
         {
-            Console.WriteLine($"Coordinate in IsCoordinateAssigned method testing for is {coordinate}");
             foreach (var boat in boatList)
             {
                 var match = boat.BoatCoordinates.Find(coordinateInList => coordinateInList.X == coordinate.X && coordinateInList.Y == coordinate.Y);

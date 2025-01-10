@@ -65,5 +65,71 @@ namespace BattleshipGame.Tests
             Assert.That(largeBoat.BoatCoordinates[0].Y, Is.EqualTo(largeBoat.BoatCoordinates[1].Y));
             Assert.That(largeBoat.BoatCoordinates[1].Y, Is.EqualTo(largeBoat.BoatCoordinates[2].Y));
         }
+
+        [Test]
+        public void XCoordSpontaneaouslyNotGeneratingCorrectlyForLargeBoatThirdCoordRegressionTest()
+        {
+            string largeBoatThirdCoord = "";
+            List<string> allLoopResults = new List<string>();
+
+            for(var i = 0; i < 20; i++)
+            {
+                var gameGrid = new GameGrid();
+                var game = new Game();
+
+                var smallBoat = new Boat("Small");
+                var coord1 = new Coordinate(2, 4);
+                smallBoat.BoatCoordinates.Add(coord1);
+
+                var mediumBoat = new Boat("Medium");
+                coord1 = new Coordinate(5, 8);
+                var coord2 = new Coordinate(5, 9);
+                mediumBoat.BoatCoordinates.Add(coord1);
+                mediumBoat.BoatCoordinates.Add(coord2);
+
+                var largeBoat = new Boat("Large");
+                coord1 = new Coordinate(7, 8);
+                coord2 = new Coordinate(6, 8);
+                largeBoat.BoatCoordinates.Add(coord1);
+                largeBoat.BoatCoordinates.Add(coord2);
+
+                var boatList = new List<Boat>
+                {
+                    smallBoat,
+                    mediumBoat,
+                    largeBoat
+                };
+
+                var startCoordinates = coord2;
+                game.RemainderCoordinatesGenerator(gameGrid, boatList, largeBoat, startCoordinates, "LeftPath", largeBoat.BoatLength() - 2, 2);
+
+                var largeBoatThirdCoordX = boatList[2].BoatCoordinates[2].X;
+                var largeBoatThirdCoordY = boatList[2].BoatCoordinates[2].Y;
+                largeBoatThirdCoord = $"{largeBoatThirdCoordX}, {largeBoatThirdCoordY}";
+
+                var result = largeBoatThirdCoord != "5, 8";
+
+                if(result)
+                {  
+                    allLoopResults.Add("true");
+                }
+
+                if(!result)
+                {  
+                    allLoopResults.Add("false");
+                }
+
+                // add all the true and false rounds to a list and then will check the list to see if the test passes
+            }
+
+            int failedIndex = allLoopResults.FindIndex(result => result != "true");
+
+            Assert.IsTrue(
+                failedIndex == -1, 
+                failedIndex == -1
+                    ? null // All passed
+                    : $"The test failed on iteration {failedIndex}"
+            );
+        }
     }
 }

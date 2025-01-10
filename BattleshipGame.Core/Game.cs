@@ -23,6 +23,7 @@ namespace BattleshipGame.Core
             boatList.Add(largeBoat);
 
             Console.WriteLine($"{ConsolePrints.InitialGridPrint(gameGrid)}");
+            Console.WriteLine($"{Environment.NewLine}");
             CoordinateAssignmentForComputerBoats(gameGrid, boatList);
         }
         
@@ -34,12 +35,15 @@ namespace BattleshipGame.Core
                 var loopCount = 0;
                 CoordinateAssignmentLoop(gameGrid, boatList, numberOfCoordinatesStillNeeded, loopCount, boat);
             }
+
+            Console.WriteLine($"{ConsolePrints.PrintBoatList(boatList)}");
         }
 
         public void CoordinateAssignmentLoop(GameGrid gameGrid, List<Boat> boatList, int numberOfCoordinatesStillNeeded, int loopCount, Boat boat)
         {
             string pathDirection = "";
             var checkedStarterCoordinate = GenerateStarterCoordinate(gameGrid, boatList, boat);
+            numberOfCoordinatesStillNeeded --;
             RemainderCoordinatesGenerator(gameGrid, boatList, boat, checkedStarterCoordinate, pathDirection, numberOfCoordinatesStillNeeded - 1, loopCount + 1);
         }
 
@@ -67,6 +71,7 @@ namespace BattleshipGame.Core
                         loopCount = 0;           
                         numberOfCoordinatesStillNeeded = boat.BoatLength();
                         CoordinateAssignmentLoop(gameGrid, boatList, numberOfCoordinatesStillNeeded, loopCount, boat);
+                        return;
                     }
 
                     else
