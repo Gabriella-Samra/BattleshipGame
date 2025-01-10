@@ -44,7 +44,7 @@ namespace BattleshipGame.Core
             string pathDirection = "";
             var checkedStarterCoordinate = GenerateStarterCoordinate(gameGrid, boatList, boat);
             numberOfCoordinatesStillNeeded --;
-            RemainderCoordinatesGenerator(gameGrid, boatList, boat, checkedStarterCoordinate, pathDirection, numberOfCoordinatesStillNeeded - 1, loopCount + 1);
+            RemainderCoordinatesGenerator(gameGrid, boatList, boat, checkedStarterCoordinate, pathDirection, numberOfCoordinatesStillNeeded, loopCount + 1);
         }
 
         public Coordinate GenerateStarterCoordinate(GameGrid gameGrid, List<Boat> boatList, Boat boat)
