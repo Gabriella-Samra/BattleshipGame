@@ -22,5 +22,7 @@ namespace BattleshipGame.Tests
             var expected = "0,0 || 1,0 || 0,1 || 1,1";
             Assert.That(printed, Is.EqualTo(expected));
         }
+
+        
     }
 }

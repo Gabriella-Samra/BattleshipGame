@@ -194,7 +194,9 @@ namespace BattleshipGame.Tests
             
             for(int i = 0; i <20; i++)
             {
+                Console.WriteLine($"Iteration Numer {i}");
                 result = IsBoatCoordinatesCountCorrect("Large");
+
 
                 if(result)
                 {  
