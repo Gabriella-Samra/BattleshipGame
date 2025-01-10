@@ -23,6 +23,75 @@ namespace BattleshipGame.Tests
             Assert.That(printed, Is.EqualTo(expected));
         }
 
-        
+        [Test]
+        public void CheckGameGridGeneratesCorrectly ()
+        {
+            var game = new Game();
+            var gameGrid = new GameGrid(2, 2);
+            Coordinate coordinate = new Coordinate(1, 1);
+
+            var isCoordInList = gameGrid.GridCoordinates.Find(coordinateInList => coordinateInList.X == coordinate.X && coordinateInList.Y == coordinate.Y);
+
+            bool result;
+
+            if(isCoordInList != null)
+            {
+                result = true;
+            }
+            else
+            {
+                result = false;
+            }
+
+            Assert.That(result);
+        }
+
+        [Test]
+        public void CheckGameGridGeneratesDoesNotIncludeCoordsItShouldNotHaveOnGrid ()
+        {
+            var game = new Game();
+            var gameGrid = new GameGrid(2, 2);
+            Coordinate coordinate = new Coordinate(3, 3);
+
+            var isCoordInList = gameGrid.GridCoordinates.Find(coordinateInList => coordinateInList.X == coordinate.X && coordinateInList.Y == coordinate.Y);
+
+            bool result;
+
+            if(isCoordInList != null)
+            {
+                result = false;
+            }
+            else
+            {
+                result = true;
+            }
+
+            Assert.That(result);
+        }
+
+
+        [Test]
+        public void CheckCoordinateOnGridMethodWorks ()
+        {
+            var game = new Game();
+            var gameGrid = new GameGrid(2, 2);
+
+            var coord = new Coordinate(1, 1);
+            var result = GameGrid.IsCoordinatesOnGrid(coord, gameGrid);
+
+            Assert.That(result);
+        }
+
+        [Test]
+        public void CheckCoordinateNOTOnGridMethodWorks ()
+        {
+            var game = new Game();
+            var gameGrid = new GameGrid(2, 2);
+
+            var coord = new Coordinate(3,3);
+            var result = GameGrid.IsCoordinatesOnGrid(coord, gameGrid);
+
+            Assert.That(!result);
+        }
     }
 }
