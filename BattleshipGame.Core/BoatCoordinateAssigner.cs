@@ -153,7 +153,7 @@ namespace BattleshipGame.Core
             }
             else if (availablePaths.Count == 1)
             {
-                var chosenPath = availablePaths[1];
+                var chosenPath = availablePaths[0];
 
                 return chosenPath switch
                 {

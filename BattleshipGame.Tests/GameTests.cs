@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using BattleshipGame.Core;
 using System.Linq.Expressions;
+using System.Security.Cryptography.X509Certificates;
 
 namespace BattleshipGame.Tests
 {
@@ -120,6 +121,90 @@ namespace BattleshipGame.Tests
                 }
 
                 // add all the true and false rounds to a list and then will check the list to see if the test passes
+            }
+
+            int failedIndex = allLoopResults.FindIndex(result => result != "true");
+
+            Assert.IsTrue(
+                failedIndex == -1, 
+                failedIndex == -1
+                    ? null // All passed
+                    : $"The test failed on iteration {failedIndex}"
+            );
+        }
+
+        private GameInstanceDTO BasicGameSetup(string boat)
+        {
+            var gameGrid = new GameGrid();
+            var game = new Game();
+
+            var smallBoat = new Boat("Small");
+            var mediumBoat = new Boat("Medium");
+            var largeBoat = new Boat("Large");
+
+            var boatList = new List<Boat>
+            {
+                smallBoat,
+                mediumBoat,
+                largeBoat
+            };
+
+            game.CoordinateAssignmentForComputerBoats(gameGrid, boatList);
+            
+            var gameInstanceDTO = new GameInstanceDTO(game, gameGrid, boatList);
+
+            return gameInstanceDTO;
+        }
+
+        private bool IsBoatCoordinatesCountCorrect(string boat)
+        {
+           
+            var gameSetup = BasicGameSetup(boat);
+            var game = gameSetup.Game;
+            var gameGrid = gameSetup.GameGrid;
+            var boatList = gameSetup.BoatList;
+            
+            var matchingBoat = Boat.FindBoatByMake(boatList, boat);
+
+            var boatResult = matchingBoat.BoatCoordinates.Count == matchingBoat.BoatLength();
+            return boatResult;
+        }
+
+        [Test]
+        public void CheckCorrectNumberOfCoordsAssignedToSmallBoatRegressionTest()
+        {
+            var result = IsBoatCoordinatesCountCorrect("Small");
+
+            Assert.That(result);
+        }
+
+        [Test]
+        public void CheckCorrectNumberOfCoordsAssignedToMediumBoatRegressionTest()
+        {
+            var result = IsBoatCoordinatesCountCorrect("Medium");
+
+            Assert.That(result);
+        }
+
+        [Test]
+        public void TwentyChecksCorrectNumberOfCoordsAssignedToLargeBoatRegressionTest()
+        {
+            bool result;
+            List<string> allLoopResults = new List<string>();
+            
+            for(int i = 0; i <20; i++)
+            {
+                result = IsBoatCoordinatesCountCorrect("Large");
+
+                if(result)
+                {  
+                    allLoopResults.Add("true");
+                }
+
+                if(!result)
+                {  
+                    allLoopResults.Add("false");
+                }
             }
 
             int failedIndex = allLoopResults.FindIndex(result => result != "true");

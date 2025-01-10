@@ -33,6 +33,12 @@ namespace BattleshipGame.Core
             return 0;
         }
 
+        public static Boat? FindBoatByMake(List<Boat> boatList, string make)
+        {
+            return boatList.Find(boat => boat.Make == make);
+        }
+
+
         public static bool IsCoordinateAssigned(List<Boat> boatList, Coordinate coordinate)
         {
             foreach (var boat in boatList)
