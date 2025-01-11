@@ -38,13 +38,12 @@ namespace BattleshipGame.Core
             return boatList.Find(boat => boat.Make == make);
         }
 
-
         public static bool IsCoordinateAssigned(List<Boat> boatList, Coordinate coordinate)
         {
             foreach (var boat in boatList)
             {
                 var match = boat.BoatCoordinates.Find(coordinateInList => coordinateInList.X == coordinate.X && coordinateInList.Y == coordinate.Y);
-                if (match != null)
+                if (match != null) // if the coord is in the list then it is assigned to match. If match has an coord then return true
                 {
                     return true;
                 }
