@@ -56,8 +56,25 @@ namespace BattleshipGame.Tests
             Assert.That(shouldBeTrue);
         }
 
-            // Should be a test below:
-            // var shouldBeFalse = Boat.IsCoordinateAlreadyAssigned(boatList, (0,1));
-            // Console.WriteLine(shouldBeFalse);
+        [Test]
+        public void GivenBoatWillBeFoundInList()
+        {
+            var boatList = new List<Boat>();
+            var smallBoat = new Boat("Small");
+            boatList.Add(smallBoat);
+
+            var selectedBoat = Boat.FindBoatByMake(boatList, smallBoat.Make);
+            bool result;
+
+            if(selectedBoat != null)
+            {
+                result = true;
+            }
+            else{
+                result = false;
+            }
+
+            Assert.That(result);
+        }
     }
 }

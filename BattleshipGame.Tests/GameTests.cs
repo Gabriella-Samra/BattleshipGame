@@ -166,6 +166,7 @@ namespace BattleshipGame.Tests
             
             var matchingBoat = Boat.FindBoatByMake(boatList, boat);
 
+            // TODO: Matchingboat could be null because the boat is not in the list. Need to do an if else here.
             var boatResult = matchingBoat.BoatCoordinates.Count == matchingBoat.BoatLength();
             return boatResult;
         }
