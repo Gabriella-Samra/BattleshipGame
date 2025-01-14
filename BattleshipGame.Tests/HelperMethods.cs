@@ -9,15 +9,15 @@ namespace BattleshipGame.Tests
 {
     public class HelperMethods
     {
-        public static Boat GetBoatWithCoordinates(string boatMake, string path)
+        public static Boat GetBoatWithCoordinates(string boatMake, string pathDirection)
         {
             var gameGrid = new GameGrid();
             var boat = new Boat(boatMake);
-            var boats = new List<Boat> { boat };
+            var boatList = new List<Boat> { boat };
             var startCoordinates = new Coordinate(5,5);
             boat.BoatCoordinates.Add(startCoordinates);
             var game = new Game();
-            game.RemainderCoordinatesGenerator(gameGrid, boats, boat, startCoordinates, path, boat.BoatLength() - 1, 1);
+            game.RemainderCoordinatesGenerator(gameGrid, boatList, boat, startCoordinates, pathDirection, boat.BoatLength() - 1);
             return boat;
         }
 

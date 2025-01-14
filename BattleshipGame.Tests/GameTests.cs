@@ -90,7 +90,7 @@ namespace BattleshipGame.Tests
                 };
 
                 var startCoordinates = coord2;
-                game.RemainderCoordinatesGenerator(gameGrid, boatList, largeBoat, startCoordinates, "LeftPath", largeBoat.BoatLength() - 2, 2);
+                game.RemainderCoordinatesGenerator(gameGrid, boatList, largeBoat, startCoordinates, "LeftPath", largeBoat.BoatLength() - 2);
 
                 var largeBoatThirdCoordX = boatList[2].BoatCoordinates[2].X;
                 var largeBoatThirdCoordY = boatList[2].BoatCoordinates[2].Y;
