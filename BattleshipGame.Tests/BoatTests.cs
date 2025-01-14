@@ -76,5 +76,27 @@ namespace BattleshipGame.Tests
 
             Assert.That(result);
         }
+
+        [Test]
+        public void CheckCoordinatesWillBeReassignedIfTheyAreAlreadyAssigned()
+        {
+            var helper = new HelperMethods();
+            bool result;
+            var gameInstanceDTO = helper.BasicGameSetup();
+            gameInstanceDTO.BoatList[0].BoatCoordinates.Add(new Coordinate(1, 1));
+            var startCoordinate = new Coordinate(1, 1);
+
+            var potentialNewCoord = Boat.ReceiveACheckedAssignedCoordinate(gameInstanceDTO.GameGrid, gameInstanceDTO.BoatList, startCoordinate);
+
+            if(startCoordinate == potentialNewCoord)
+            {
+                result = true;
+            }
+            else{
+                result = false;
+            }
+
+            Assert.That(!result);
+        }
     }
 }

@@ -14,38 +14,26 @@ namespace BattleshipGame.Tests
             var game = new Game();
 
             Assert.IsNotNull(game);
-        }
-
-        private Boat GetBoatWithCoordinates(string boatMake, string path)
-        {
-            var gameGrid = new GameGrid();
-            var boat = new Boat(boatMake);
-            var boats = new List<Boat> { boat };
-            var startCoordinates = new Coordinate(5,5);
-            boat.BoatCoordinates.Add(startCoordinates);
-            var game = new Game();
-            game.RemainderCoordinatesGenerator(gameGrid, boats, boat, startCoordinates, path, boat.BoatLength() - 1, 1);
-            return boat;
-        }
+        }   
 
         [Test]
         public void SmallBoatGetsOneCoordinate()
         {
-            var smallBoat = GetBoatWithCoordinates("Small", "LeftPath");
+            var smallBoat = HelperMethods.GetBoatWithCoordinates("Small", "LeftPath");
             Assert.That(smallBoat.BoatCoordinates.Count, Is.EqualTo(1));
         }
 
         [Test]
         public void MediumBoatGetsTwoCoordinates()
         {
-            var mediumBoat = GetBoatWithCoordinates("Medium", "LeftPath");
+            var mediumBoat = HelperMethods.GetBoatWithCoordinates("Medium", "LeftPath");
             Assert.That(mediumBoat.BoatCoordinates.Count, Is.EqualTo(2));
         }
 
         [Test]
         public void MediumBoatGetsSequentialCoordinatesWhenPathingLeft()
         {
-            var mediumBoat = GetBoatWithCoordinates("Medium", "LeftPath");
+            var mediumBoat = HelperMethods.GetBoatWithCoordinates("Medium", "LeftPath");
             Assert.That(mediumBoat.BoatCoordinates[0].X, Is.Not.EqualTo(mediumBoat.BoatCoordinates[1].X));
             Assert.That(mediumBoat.BoatCoordinates[0].Y, Is.EqualTo(mediumBoat.BoatCoordinates[1].Y));
         }
@@ -53,14 +41,14 @@ namespace BattleshipGame.Tests
         [Test]
         public void LargeBoatGetsThreeCoordinates()
         {
-            var largeBoat = GetBoatWithCoordinates("Large", "LeftPath");
+            var largeBoat = HelperMethods.GetBoatWithCoordinates("Large", "LeftPath");
             Assert.That(largeBoat.BoatCoordinates.Count, Is.EqualTo(3));
         }
 
         [Test]
         public void LargeBoatGetsSequentialCoordinatesWhenPathingLeft()
         {
-            var largeBoat = GetBoatWithCoordinates("Large", "LeftPath");
+            var largeBoat = HelperMethods.GetBoatWithCoordinates("Large", "LeftPath");
             Assert.That(largeBoat.BoatCoordinates[0].X, Is.Not.EqualTo(largeBoat.BoatCoordinates[1].X));
             Assert.That(largeBoat.BoatCoordinates[1].X, Is.Not.EqualTo(largeBoat.BoatCoordinates[2].X));
             Assert.That(largeBoat.BoatCoordinates[0].Y, Is.EqualTo(largeBoat.BoatCoordinates[1].Y));
@@ -133,55 +121,11 @@ namespace BattleshipGame.Tests
             );
         }
 
-        private GameInstanceDTO BasicGameSetup(string boat)
-        {
-            var gameGrid = new GameGrid();
-            var game = new Game();
-
-            var smallBoat = new Boat("Small");
-            var mediumBoat = new Boat("Medium");
-            var largeBoat = new Boat("Large");
-
-            var boatList = new List<Boat>
-            {
-                smallBoat,
-                mediumBoat,
-                largeBoat
-            };
-
-            game.CoordinateAssignmentForComputerBoats(gameGrid, boatList);
-            
-            var gameInstanceDTO = new GameInstanceDTO(game, gameGrid, boatList);
-
-            return gameInstanceDTO;
-        }
-
-        private bool IsBoatCoordinatesCountCorrect(string boat)
-        {
-           
-            var gameSetup = BasicGameSetup(boat);
-            var game = gameSetup.Game;
-            var gameGrid = gameSetup.GameGrid;
-            var boatList = gameSetup.BoatList;
-            
-            var matchingBoat = Boat.FindBoatByMake(boatList, boat);
-            bool boatResult;
-
-            if (matchingBoat != null)
-            {
-                boatResult = matchingBoat.BoatCoordinates.Count == matchingBoat.BoatLength();
-            }
-            else{
-                throw new Exception("boat does not exist in list");
-            }
-            
-            return boatResult;
-        }
-
         [Test]
         public void CheckCorrectNumberOfCoordsAssignedToSmallBoatRegressionTest()
         {
-            var result = IsBoatCoordinatesCountCorrect("Small");
+            var helper = new HelperMethods();
+            var result = helper.IsBoatCoordinatesCountCorrect("Small");
 
             Assert.That(result);
         }
@@ -189,7 +133,8 @@ namespace BattleshipGame.Tests
         [Test]
         public void CheckCorrectNumberOfCoordsAssignedToMediumBoatRegressionTest()
         {
-            var result = IsBoatCoordinatesCountCorrect("Medium");
+            var helper = new HelperMethods();
+            var result = helper.IsBoatCoordinatesCountCorrect("Medium");
 
             Assert.That(result);
         }
@@ -203,7 +148,8 @@ namespace BattleshipGame.Tests
             for(int i = 0; i <20; i++)
             {
                 Console.WriteLine($"Iteration Numer {i}");
-                result = IsBoatCoordinatesCountCorrect("Large");
+                var helper = new HelperMethods();
+                result = helper.IsBoatCoordinatesCountCorrect("Large");
 
 
                 if(result)
