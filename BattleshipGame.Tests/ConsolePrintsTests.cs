@@ -29,5 +29,40 @@ namespace BattleshipGame.Tests
 
             Assert.That(initialGrid, Is.EqualTo(expected));
         }
+
+        [Test]
+        public void CheckBoatListPrinterPrintsCorrectly()
+        {
+            var smallBoat = new Boat("Small");
+            smallBoat.BoatCoordinates.Add(new Coordinate(1, 1));
+
+            var mediumBoat = new Boat("Medium");
+            mediumBoat.BoatCoordinates.Add(new Coordinate(2, 2));
+            mediumBoat.BoatCoordinates.Add(new Coordinate(2, 3));
+
+            var largeBoat = new Boat("Large");
+            largeBoat.BoatCoordinates.Add(new Coordinate(3, 3));
+            largeBoat.BoatCoordinates.Add(new Coordinate(3, 4));
+            largeBoat.BoatCoordinates.Add(new Coordinate(3, 5));
+
+            var boatList = new List<Boat>
+            {
+                smallBoat,
+                mediumBoat,
+                largeBoat
+            };
+
+            var result = ConsolePrints.PrintBoatList(boatList);
+            
+            string expectedResult = Environment.NewLine +
+                            "---" + Environment.NewLine +
+                            "Saved in the boatList at the end of running the function is..." + Environment.NewLine +
+                            "    Small: Coord 1 = (1, 1)" + Environment.NewLine +
+                            "    Medium: Coord 1 = (2, 2), Coord 2 = (2, 3)" + Environment.NewLine +
+                            "    Large: Coord 1 = (3, 3), Coord 2 = (3, 4), Coord 3 = (3, 5)" + Environment.NewLine +
+                            "---";
+
+            Assert.That(result, Is.EqualTo(expectedResult).Using((System.Collections.IComparer)StringComparer.Ordinal), "The generated string does not match the expected format.");
+        }
     }
 }
