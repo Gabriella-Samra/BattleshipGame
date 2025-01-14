@@ -5,23 +5,40 @@ using System.Threading.Tasks;
 
 namespace BattleshipGame.Core
 {
+    /// <summary>Methods to assigning the next Coordinate needed based on the path taken for the previous Coordinates</summary>
     public class BoatCoordinateAssigner
     {
-        public static BoatPathCoordinate AddAdditionalCoordinatesToBoats(Coordinate starterCoordinate, List<Boat> boatList, GameGrid gameGrid, string pathDirection)
+        /// <summary>Looking at the path direction supplied, the correct method is called to assign the remaining Coordinates needed.</summary>
+        /// <param name="lastCoordinate">The last Coordinate assigned to the boat to make sure the next coordinate is assigned only 1 grid spot away.</param>
+        /// <param name="boatList">An instance of all the boats assigned to the list.</param>
+        /// <param name="gameGrid">An instance of the game grid with all the X and Y Coordinates set.</param>
+        /// <param name="pathDirection">The direction that was taken by the last Coordinate that was set for the boat</param>
+        /// <returns>A combination of a Coordinate and a PathDirection is returned.</returns>
+        public static BoatPathCoordinate AddAdditionalCoordinatesToBoats(Coordinate lastCoordinate, List<Boat> boatList, GameGrid gameGrid, string pathDirection)
         {
             return pathDirection switch
             {
-                "LeftPath" => GetPathCoordinate(starterCoordinate, boatList, gameGrid, -1, 0, "LeftPath"),
-                "RightPath" => GetPathCoordinate(starterCoordinate, boatList, gameGrid, 1, 0, "RightPath"),
-                "UpPath" => GetPathCoordinate(starterCoordinate, boatList, gameGrid, 0, -1, "UpPath"),
-                "DownPath" => GetPathCoordinate(starterCoordinate, boatList, gameGrid, 0, 1, "DownPath"),
-                _ => GetAllPathsCoordinate(starterCoordinate, boatList, gameGrid)
+                "LeftPath" => GetPathCoordinate(lastCoordinate, boatList, gameGrid, -1, 0, "LeftPath"),
+                "RightPath" => GetPathCoordinate(lastCoordinate, boatList, gameGrid, 1, 0, "RightPath"),
+                "UpPath" => GetPathCoordinate(lastCoordinate, boatList, gameGrid, 0, -1, "UpPath"),
+                "DownPath" => GetPathCoordinate(lastCoordinate, boatList, gameGrid, 0, 1, "DownPath"),
+                _ => GetAllPathsCoordinate(lastCoordinate, boatList, gameGrid)
             };
         }
-
-        private static BoatPathCoordinate GetPathCoordinate(Coordinate starterCoordinate, List<Boat> boatList, GameGrid gameGrid, int xDiff, int yDiff, string pathDirection)
+        
+        /// <summary>
+        /// Based on the path Direction, a new coordinate is generated taking into account the difference from the given coordinate
+        /// </summary>
+        /// <param name="givenCoordinate">The Coordinate used to determine what the next Coordinate should be.</param>
+        /// <param name="boatList">An instance of all the boats assigned to the list.</param>
+        /// <param name="gameGrid">An instance of the game grid with all the X and Y Coordinates set.</param>
+        /// <param name="xDiff">The difference between the givenCoordinates X coordinate and what the path would dictate would be the new Coordinate's x coord.</param>
+        /// <param name="yDiff">The difference between the givenCoordinates y coordinate and what the path would dictate would be the new Coordinate's y coord.</param>
+        /// <param name="pathDirection">The direction that was taken by the last Coordinate that was set for the boat</param>
+        /// <returns>A combination of a Coordinate and a PathDirection is returned.</returns>
+        private static BoatPathCoordinate GetPathCoordinate(Coordinate givenCoordinate, List<Boat> boatList, GameGrid gameGrid, int xDiff, int yDiff, string pathDirection)
         {
-            Coordinate newCoordinate = new Coordinate(starterCoordinate.X + xDiff, starterCoordinate.Y + yDiff);
+            Coordinate newCoordinate = new Coordinate(givenCoordinate.X + xDiff, givenCoordinate.Y + yDiff);
 
             bool isPathValid = IsPathValid(newCoordinate, boatList, gameGrid);
 
@@ -33,7 +50,14 @@ namespace BattleshipGame.Core
             return new BoatPathCoordinate(newCoordinate, pathDirection);
         }
 
-        private static BoatPathCoordinate GetAllPathsCoordinate(Coordinate starterCoordinate, List<Boat> boatList, GameGrid gameGrid)
+        /// <summary>
+        /// A random selection between the four different path directions (left, right, up, or down) based on if the new Coordinate for each direction is on the grid and not already assigned to another boat.
+        /// </summary>
+        /// <param name="givenCoordinate">The Coordinate used to determine what the next Coordinate should be.</param>
+        /// <param name="boatList">An instance of all the boats assigned to the list.</param>
+        /// <param name="gameGrid">An instance of the game grid with all the X and Y Coordinates set.</param>
+        /// <returns>A combination of a Coordinate and a PathDirection is returned.</returns>
+        private static BoatPathCoordinate GetAllPathsCoordinate(Coordinate givenCoordinate, List<Boat> boatList, GameGrid gameGrid)
         {
             var pathDirections = new Dictionary<string, (int xDiff, int yDiff)>
             {
@@ -49,7 +73,7 @@ namespace BattleshipGame.Core
             foreach (var path in pathDirections)
             {
                 var (xDiff, yDiff) = path.Value;
-                var newCoordinate = new Coordinate(starterCoordinate.X + xDiff, starterCoordinate.Y + yDiff);
+                var newCoordinate = new Coordinate(givenCoordinate.X + xDiff, givenCoordinate.Y + yDiff);
 
                 if (IsPathValid(newCoordinate, boatList, gameGrid))
                 {
@@ -75,6 +99,14 @@ namespace BattleshipGame.Core
             }
         }
 
+        /// <summary>
+        /// Checks to see if the given coordinate is already assigned to a boat already in the list and or if the boat is within the bounds of the gameGrid
+        /// </summary>
+        /// <param name="coordinate">The Coordinate used to determine what the next Coordinate should be.</param>
+        /// <param name="boatList">An instance of all the boats assigned to the list.</param>
+        /// <param name="gameGrid">An instance of the game grid with all the X and Y Coordinates set.</param>
+        /// <returns>A combination of a Coordinate and a PathDirection is returned.</returns>
+        /// <returns>A boolean of false is returned if the given coordinate is not on the grid. Returns false if the coordinate is already assigned to a boat.</returns>
         private static bool IsPathValid(Coordinate coordinate, List<Boat> boatList, GameGrid gameGrid)
         {
             if (!GameGrid.IsCoordinatesOnGrid(coordinate, gameGrid))

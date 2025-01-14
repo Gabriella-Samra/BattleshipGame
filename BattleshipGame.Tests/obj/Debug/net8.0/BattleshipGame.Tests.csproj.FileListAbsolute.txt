@@ -104,3 +104,4 @@ C:\Users\Gabbie\Desktop\Projects\BattleshipGame\BattleshipGame.Tests\obj\Debug\n
 C:\Users\Gabbie\Desktop\Projects\BattleshipGame\BattleshipGame.Tests\obj\Debug\net8.0\BattleshipGame.Tests.pdb
 C:\Users\Gabbie\Desktop\Projects\BattleshipGame\BattleshipGame.Tests\obj\Debug\net8.0\BattleshipGame.Tests.genruntimeconfig.cache
 C:\Users\Gabbie\Desktop\Projects\BattleshipGame\BattleshipGame.Tests\obj\Debug\net8.0\ref\BattleshipGame.Tests.dll
+C:\Users\Gabbie\Desktop\Projects\BattleshipGame\BattleshipGame.Tests\bin\Debug\net8.0\BattleshipGame.Core.xml

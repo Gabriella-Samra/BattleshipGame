@@ -7,8 +7,14 @@ using System.Xml.XPath;
 
 namespace BattleshipGame.Core
 {
+    /// <summary>
+    /// All the methods that will return a complicated string to be printed to the console.
+    /// </summary>
     public class ConsolePrints
     {
+        /// <summary>Joins all the grid coordinates for the given gameGrid and places them into a format to make the output look like a grid.</summary>
+        /// <param name="gameGrid">An instance of the game grid with all the X and Y Coordinates set.</param>
+        /// <returns>A formatted string of Coordinates Where every row of 10 Coordinates starts a new line</returns>
         public static string InitialGridPrint(GameGrid gameGrid)
         {
             string result = string.Join(" || ", gameGrid.GridCoordinates
@@ -29,12 +35,17 @@ namespace BattleshipGame.Core
             return result;
         }
 
+        /// <summary>
+        /// Interates through the list of boats and creates a formatted string based on the Boat make and the list of Coordinates assigned to the boat.
+        /// </summary>
+        /// <param name="boatList">An instance of a list of boats</param>
+        /// <returns>A formatted string of all the instances of boats and their coordinates added to the given list.</returns>
         public static string PrintBoatList(List<Boat> boatList)
         {
             string result = Environment.NewLine;
             result += "---";
             result += Environment.NewLine;
-            result += "Saved in the boatList at the end of running the function is...";
+            result += "Saved in the boatList is:";
             result += Environment.NewLine;
 
             for(int i = 0; i < boatList.Count; i ++)

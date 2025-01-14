@@ -86,7 +86,7 @@ namespace BattleshipGame.Tests
             gameInstanceDTO.BoatList[0].BoatCoordinates.Add(new Coordinate(1, 1));
             var startCoordinate = new Coordinate(1, 1);
 
-            var potentialNewCoord = Boat.ReceiveACheckedAssignedCoordinate(gameInstanceDTO.GameGrid, gameInstanceDTO.BoatList, startCoordinate);
+            var potentialNewCoord = Boat.CheckAndOrReassignCoordinate(gameInstanceDTO.GameGrid, gameInstanceDTO.BoatList, startCoordinate);
 
             if(startCoordinate == potentialNewCoord)
             {
