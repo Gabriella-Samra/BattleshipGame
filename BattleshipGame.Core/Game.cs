@@ -28,6 +28,8 @@ namespace BattleshipGame.Core
 
             Console.WriteLine($"{ConsolePrints.InitialGridPrint(gameGrid)}");
             CoordinateAssignmentForComputerBoats(gameGrid, boatList);
+            GameGrid.UpdateGameGridWithBoats(gameGrid, boatList);
+            Console.WriteLine($"{ConsolePrints.UpdatesWithBoatGridPrint(gameGrid)}");
         }
         
         /// <summary>The starter method for setting coordinates for all 3 boats that belong to the computer. 1 coord for small, 2 for medium, and 3 for large boats.</summary>

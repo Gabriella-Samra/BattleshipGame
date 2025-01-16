@@ -51,5 +51,36 @@ namespace BattleshipGame.Core
 
             return true;
         }
+
+        /// <summary>
+        /// Updates the given gameGrid based on boat coordinate locations. The location on the grid is replaced with initials of the boat eg. Small boat will show SB, Medium will show MB etc. 
+        /// </summary>
+        /// <returns>A GameGrid which has been updated to show the location of boats based on the boatList passed in.</returns>
+        public static GameGrid UpdateGameGridWithBoats(GameGrid gameGrid, List<Boat> boatList)
+        {
+            foreach (var boat in boatList)
+            {
+                string boatCode = boat.Make switch
+                {
+                    "Small" => "SB",
+                    "Medium" => "MB",
+                    "Large" => "LB",
+                    _ => "--" // Default case if the boat's make is unknown
+                };
+
+                foreach (var boatCoordinate in boat.BoatCoordinates)
+                {
+                    int index = gameGrid.GridCoordinates.FindIndex(gridCoord => gridCoord.X == boatCoordinate.X && gridCoord.Y == boatCoordinate.Y);
+
+                    if (index != -1) // Coordinate found
+                    {
+                        gameGrid.GridCoordinates[index] = new StringCoordinate(boatCoordinate.X, boatCoordinate.Y, boatCode);
+                    }
+                }
+            }
+
+            return gameGrid;
+        }
+
     }
 }

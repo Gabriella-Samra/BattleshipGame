@@ -19,17 +19,40 @@ namespace BattleshipGame.Core
         {
             string result = string.Join(" || ", gameGrid.GridCoordinates
             
-            .Take(10)
-            .Select(coord => $"{coord.X},{coord.Y}"));
+                .Take(10)
+                .Select(coord => $"{coord.X},{coord.Y}"));
 
             for (int i = 10; i < gameGrid.GridCoordinates.Count; i += 10)
             {
                 result += Environment.NewLine;
                 result += string.Join(" || ", gameGrid.GridCoordinates
 
-                .Skip(i)
+                    .Skip(i)
+                    .Take(10)
+                    .Select(coord => $"{coord.X},{coord.Y}"));
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gameGrid"></param>
+        /// <returns></returns>
+        public static string UpdatesWithBoatGridPrint(GameGrid gameGrid)
+        {
+            string result = string.Join(" || ", gameGrid.GridCoordinates
                 .Take(10)
-                .Select(coord => $"{coord.X},{coord.Y}"));
+                .Select(coord => coord is StringCoordinate stringCoord ? stringCoord.BoatCode : $"{coord.X},{coord.Y}"));
+
+            for (int i = 10; i < gameGrid.GridCoordinates.Count; i += 10)
+            {
+                result += Environment.NewLine;
+                result += string.Join(" || ", gameGrid.GridCoordinates
+                    .Skip(i)
+                    .Take(10)
+                    .Select(coord => coord is StringCoordinate stringCoord ? stringCoord.BoatCode : $"{coord.X},{coord.Y}"));
             }
 
             return result;
