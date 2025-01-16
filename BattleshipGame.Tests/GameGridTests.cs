@@ -93,5 +93,20 @@ namespace BattleshipGame.Tests
 
             Assert.That(!result);
         }
+
+        [Test]
+        public void CheckSmallBoatCoordIsAddedToGameGrid ()
+        {
+            var helper = new HelperMethods();
+            var game = helper.BasicGameSetup();
+
+            game.BoatList[0].BoatCoordinates.Add(new Coordinate(1, 1));
+            int index = game.GameGrid.GridCoordinates.FindIndex(gridCoord => gridCoord.X == 1 && gridCoord.Y == 1);
+            var newGameGrid = GameGrid.UpdateGameGridWithBoats(game.GameGrid, game.BoatList);
+
+            int boatLocation = newGameGrid.GridCoordinates.FindIndex(coord => coord is StringCoordinate stringCoord && stringCoord.BoatCode == "SB");
+            
+            Is.EqualTo(index == boatLocation);
+        }
     }
 }
