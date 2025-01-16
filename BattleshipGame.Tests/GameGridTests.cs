@@ -104,7 +104,7 @@ namespace BattleshipGame.Tests
             int index = game.GameGrid.GridCoordinates.FindIndex(gridCoord => gridCoord.X == 1 && gridCoord.Y == 1);
             var newGameGrid = GameGrid.UpdateGameGridWithBoats(game.GameGrid, game.BoatList);
 
-            int boatLocation = newGameGrid.GridCoordinates.FindIndex(coord => coord is StringCoordinate stringCoord && stringCoord.BoatCode == "SB");
+            int boatLocation = newGameGrid.GridCoordinates.FindIndex(coord => coord is StringCoordinate stringCoord && stringCoord.BoatCode == "S,B");
             
             Is.EqualTo(index == boatLocation);
         }

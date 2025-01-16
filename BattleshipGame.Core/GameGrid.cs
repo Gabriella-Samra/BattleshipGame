@@ -62,9 +62,9 @@ namespace BattleshipGame.Core
             {
                 string boatCode = boat.Make switch
                 {
-                    "Small" => "SB",
-                    "Medium" => "MB",
-                    "Large" => "LB",
+                    "Small" => "S,B",
+                    "Medium" => "M,B",
+                    "Large" => "L,B",
                     _ => "--" // Default case if the boat's make is unknown
                 };
 
