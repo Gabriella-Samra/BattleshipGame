@@ -17,31 +17,30 @@ namespace BattleshipGame.Tests
         [Test]
         public void PromptForStringShouldPrintPromptMessage()
         {
-            // Arrange
             string expectedMessage = "Guess a coordinate of mine. Please format as follows: (1,1)";
-            using (var consoleOutput = new StringWriter())
-            {
-                Console.SetOut(consoleOutput);
-                
-                // Simulate user input
-                using (var consoleInput = new StringReader("(1,1)"))
-                {
-                    Console.SetIn(consoleInput);
 
-                    // Act
-                    Prompt.PromptForString(expectedMessage);
-                }
+            TextWriter originalConsoleOut = Console.Out;
 
-                // Assert
-                string output = consoleOutput.ToString();
-                Assert.IsTrue(output.Contains(expectedMessage));
-            }
+            using var consoleOutput = new StringWriter();
+            Console.SetOut(consoleOutput);
+            
+            using var consoleInput = new StringReader("(1,1)");
+            Console.SetIn(consoleInput);
+
+            Prompt.PromptForString(expectedMessage);
+
+            string output = consoleOutput.ToString();
+            Assert.That(output, Does.Contain(expectedMessage));
+
+            Console.SetOut(originalConsoleOut);
         }
 
         [Test]
         public void PromptForStringShouldPromptAgainOnEmptyInputAndReturnValidResponse()
         {
             string promptMessage = "Guess a coordinate of mine. Please format as follows: (1,1)";
+
+            TextWriter originalConsoleOut = Console.Out;
             
             using var consoleOutput = new StringWriter();
             Console.SetOut(consoleOutput);
@@ -61,12 +60,16 @@ namespace BattleshipGame.Tests
 
             // Ensure the invalid prompt was shown after empty input
             Assert.That(output, Does.Contain("Invalid: " + promptMessage), "Expected invalid prompt after empty input.");
+
+            Console.SetOut(originalConsoleOut);
         }
 
         [Test]
         public void PromptForStringShouldStopRecursionOnValidInput()
         {
             string initialMessage = "Guess a coordinate of mine. Please format as follows: (1,1)";
+
+            TextWriter originalConsoleOut = Console.Out;
 
             using var consoleOutput = new StringWriter();
             Console.SetOut(consoleOutput);
@@ -77,6 +80,8 @@ namespace BattleshipGame.Tests
             string result = Prompt.PromptForString(initialMessage);
 
             Assert.That(result, Is.EqualTo("(1,1)"), "Expected valid coordinate response after retries.");
+
+            Console.SetOut(originalConsoleOut);
         }
     }
 }
