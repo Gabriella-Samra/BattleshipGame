@@ -190,7 +190,53 @@ namespace BattleshipGame.Tests
             Assert.That(result, Is.EqualTo(expectedResult));
         }
 
-        
+        [Test]
+        public void CheckFirstNumberCanNotBeFoundIfNoComma()
+        {
+            string stringToTest = "(1X";
+            int commaLocation = -1 ;
+            int locationOfOpeningBracket = 0;
+            var result = PromptValidation.IsNumberPresentBetweenOpeningBracketAndComma(stringToTest, commaLocation, locationOfOpeningBracket);
+            bool expectedResult = false;
+
+            Assert.That(result, Is.EqualTo(expectedResult));
+        }
+
+        [Test]
+        public void CheckSecondNumberCanNotBeFoundIfNoComma()
+        {
+            string stringToTest = "(11)";
+            int commaLocation = -1;
+            int locationOfClosingBracket = stringToTest.Length - 1;
+            var result = PromptValidation.IsNumberPresentBetweenCommaAndClosingBracket(stringToTest, commaLocation, locationOfClosingBracket);
+            bool expectedResult = false;
+
+            Assert.That(result, Is.EqualTo(expectedResult));
+        }
+
+        [Test]
+        public void CheckFirstNumberCanNotBeFoundIfNoBracket()
+        {
+            string stringToTest = "1,X)";
+            int commaLocation = 1 ;
+            int locationOfOpeningBracket = -1;
+            var result = PromptValidation.IsNumberPresentBetweenOpeningBracketAndComma(stringToTest, commaLocation, locationOfOpeningBracket);
+            bool expectedResult = false;
+
+            Assert.That(result, Is.EqualTo(expectedResult));
+        }
+
+        [Test]
+        public void CheckSecondNumberCanNotBeFoundIfNoBracket()
+        {
+            string stringToTest = "(1,1";
+            int commaLocation = 2;
+            int locationOfClosingBracket = -1;
+            var result = PromptValidation.IsNumberPresentBetweenCommaAndClosingBracket(stringToTest, commaLocation, locationOfClosingBracket);
+            bool expectedResult = false;
+
+            Assert.That(result, Is.EqualTo(expectedResult));
+        }       
 
     }
 }
