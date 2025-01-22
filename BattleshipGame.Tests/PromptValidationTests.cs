@@ -50,5 +50,14 @@ namespace BattleshipGame.Tests
             Assert.That(result, Is.True);           
         }
 
+        [Test]
+        public void CheckNumberPassesValidCharactersCheckMethod()
+        {
+            string comma = "1";
+            var result = PromptValidation.CheckOnlyValidCharacters(comma);
+
+            Assert.That(result, Is.True);           
+        }
+
     }
 }
