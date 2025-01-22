@@ -6,7 +6,7 @@ using NUnit.Framework;
 
 namespace BattleshipGame.Tests
 {
-    public class PromptValidation
+    public class PromptTests
     {
         [SetUp]
         public void Setup()
