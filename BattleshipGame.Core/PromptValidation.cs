@@ -97,6 +97,9 @@ namespace BattleshipGame.Core
         /// <returns>True if a valid number is present; otherwise, false.</returns>            
         public static bool IsNumberPresentBetweenOpeningBracketAndComma(string coord, int commaLocation, int locationOfOpeningBracket)
         {
+            if (commaLocation < 2) return false;
+            if (locationOfOpeningBracket < 0) return false;
+
             string numCheckValue = coord.Substring(locationOfOpeningBracket + 1, commaLocation - (locationOfOpeningBracket + 1));
             bool isNumber = !string.IsNullOrEmpty(numCheckValue) && numCheckValue.All(char.IsDigit);
             // If the string between the ( and , is not a number then return false
@@ -118,6 +121,9 @@ namespace BattleshipGame.Core
         /// <returns>True if a valid number is present; otherwise, false.</returns>
         public static bool IsNumberPresentBetweenCommaAndClosingBracket(string coord, int commaLocation, int locationOfClosingBracket)
         {
+            if (commaLocation < 2) return false;
+            if (locationOfClosingBracket < coord.Length - 1) return false;
+
             string numCheckValue = coord.Substring(commaLocation + 1, locationOfClosingBracket - (commaLocation + 1));
             bool isNumber = !string.IsNullOrEmpty(numCheckValue) && numCheckValue.All(char.IsDigit);
             // If the string between the , and ) is not a number then return false
