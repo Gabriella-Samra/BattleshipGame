@@ -166,5 +166,31 @@ namespace BattleshipGame.Tests
             Assert.That(result, Is.EqualTo(expectedResult));         
         }
 
+        [Test]
+        public void CheckFirstNumberCanBeFound()
+        {
+            string stringToTest = "(1,X";
+            int commaLocation = 2;
+            int locationOfOpeningBracket = 0;
+            var result = PromptValidation.IsNumberPresentBetweenOpeningBracketAndComma(stringToTest, commaLocation, locationOfOpeningBracket);
+            bool expectedResult = true;
+
+            Assert.That(result, Is.EqualTo(expectedResult));
+        }
+
+        [Test]
+        public void CheckSecondNumberCanBeFound()
+        {
+            string stringToTest = "(1,1)";
+            int commaLocation = 2;
+            int locationOfClosingBracket = stringToTest.Length - 1;
+            var result = PromptValidation.IsNumberPresentBetweenCommaAndClosingBracket(stringToTest, commaLocation, locationOfClosingBracket);
+            bool expectedResult = true;
+
+            Assert.That(result, Is.EqualTo(expectedResult));
+        }
+
+        
+
     }
 }
