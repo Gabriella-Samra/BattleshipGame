@@ -106,5 +106,65 @@ namespace BattleshipGame.Tests
             Assert.That(result, Is.EqualTo(expectedResult));         
         }
 
+        [Test]
+        public void CheckOpeningBracketPositionNeedsToBeFirst()
+        {
+            string stringToTest = "(X";
+            var result = PromptValidation.FindOpeningBracketPosition(stringToTest);
+            int expectedResult = 0;
+
+            Assert.That(result, Is.EqualTo(expectedResult));         
+        }
+
+        [Test]
+        public void CheckOpeningBracketCantBeFoundIfItIsntFirst()
+        {
+            string stringToTest = "X(X";
+            var result = PromptValidation.FindOpeningBracketPosition(stringToTest);
+            int? expectedResult = null;
+
+            Assert.That(result, Is.EqualTo(expectedResult));         
+        }
+
+        [Test]
+        public void CheckOpeningBracketPositionCanNotBeFound()
+        {
+            string stringToTest = "XX";
+            var result = PromptValidation.FindOpeningBracketPosition(stringToTest);
+            int? expectedResult = null;
+
+            Assert.That(result, Is.EqualTo(expectedResult));         
+        }
+
+        [Test]
+        public void CheckClosingBracketPositionNeedsToBeLast()
+        {
+            string stringToTest = "X)";
+            var result = PromptValidation.FindClosingBracketPosition(stringToTest);
+            int expectedResult = stringToTest.Length - 1;
+
+            Assert.That(result, Is.EqualTo(expectedResult));         
+        }
+
+        [Test]
+        public void CheckClosingBracketCantBeFoundIfItIsntFirst()
+        {
+            string stringToTest = "X)X";
+            var result = PromptValidation.FindClosingBracketPosition(stringToTest);
+            int? expectedResult = null;
+
+            Assert.That(result, Is.EqualTo(expectedResult));         
+        }
+
+        [Test]
+        public void CheckClosingBracketPositionCanNotBeFound()
+        {
+            string stringToTest = "XX";
+            var result = PromptValidation.FindClosingBracketPosition(stringToTest);
+            int? expectedResult = null;
+
+            Assert.That(result, Is.EqualTo(expectedResult));         
+        }
+
     }
 }
