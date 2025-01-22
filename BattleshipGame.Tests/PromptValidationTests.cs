@@ -26,8 +26,8 @@ namespace BattleshipGame.Tests
         [Test]
         public void CheckOpeningBracketPassesValidCharactersCheckMethod()
         {
-            string comma = "(";
-            var result = PromptValidation.CheckOnlyValidCharacters(comma);
+            string openingBracket = "(";
+            var result = PromptValidation.CheckOnlyValidCharacters(openingBracket);
 
             Assert.That(result, Is.True);           
         }
@@ -35,8 +35,8 @@ namespace BattleshipGame.Tests
         [Test]
         public void CheckClosingBracketPassesValidCharactersCheckMethod()
         {
-            string comma = ")";
-            var result = PromptValidation.CheckOnlyValidCharacters(comma);
+            string closingBracket = ")";
+            var result = PromptValidation.CheckOnlyValidCharacters(closingBracket);
 
             Assert.That(result, Is.True);           
         }
@@ -44,8 +44,8 @@ namespace BattleshipGame.Tests
         [Test]
         public void CheckSpacePassesValidCharactersCheckMethod()
         {
-            string comma = " ";
-            var result = PromptValidation.CheckOnlyValidCharacters(comma);
+            string space = " ";
+            var result = PromptValidation.CheckOnlyValidCharacters(space);
 
             Assert.That(result, Is.True);           
         }
@@ -53,8 +53,8 @@ namespace BattleshipGame.Tests
         [Test]
         public void CheckNumberPassesValidCharactersCheckMethod()
         {
-            string comma = "1";
-            var result = PromptValidation.CheckOnlyValidCharacters(comma);
+            string number = "1";
+            var result = PromptValidation.CheckOnlyValidCharacters(number);
 
             Assert.That(result, Is.True);           
         }
@@ -62,8 +62,8 @@ namespace BattleshipGame.Tests
         [Test]
         public void CheckLetterDoesNotPassValidCharactersCheckMethod()
         {
-            string comma = "a";
-            var result = PromptValidation.CheckOnlyValidCharacters(comma);
+            string letter = "a";
+            var result = PromptValidation.CheckOnlyValidCharacters(letter);
 
             Assert.That(result, Is.False);           
         }
@@ -71,8 +71,8 @@ namespace BattleshipGame.Tests
         [Test]
         public void CheckSpecialCharacterDoesNotPassValidCharactersCheckMethod()
         {
-            string comma = "*";
-            var result = PromptValidation.CheckOnlyValidCharacters(comma);
+            string specialCharacter = "*";
+            var result = PromptValidation.CheckOnlyValidCharacters(specialCharacter);
 
             Assert.That(result, Is.False);           
         }
@@ -80,11 +80,13 @@ namespace BattleshipGame.Tests
         [Test]
         public void CheckCombinationOfAllowedAndNotAllowedStringDoesNotPassValidCharactersCheckMethod()
         {
-            string comma = "*1,";
-            var result = PromptValidation.CheckOnlyValidCharacters(comma);
+            string stringToTest = "*1,";
+            var result = PromptValidation.CheckOnlyValidCharacters(stringToTest);
 
             Assert.That(result, Is.False);           
         }
+
+        
 
     }
 }
