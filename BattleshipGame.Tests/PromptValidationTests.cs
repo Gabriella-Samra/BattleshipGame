@@ -86,7 +86,25 @@ namespace BattleshipGame.Tests
             Assert.That(result, Is.False);           
         }
 
-        
+        [Test]
+        public void CheckCommaPositionCanBeFound()
+        {
+            string stringToTest = "X,X";
+            var result = PromptValidation.FindCommaPosition(stringToTest);
+            int expectedResult = 1;
+
+            Assert.That(result, Is.EqualTo(expectedResult));         
+        }
+
+        [Test]
+        public void CheckCommaPositionCanNotBeFound()
+        {
+            string stringToTest = "XX";
+            var result = PromptValidation.FindCommaPosition(stringToTest);
+            int? expectedResult = null;
+
+            Assert.That(result, Is.EqualTo(expectedResult));         
+        }
 
     }
 }
