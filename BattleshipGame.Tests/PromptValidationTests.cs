@@ -68,5 +68,14 @@ namespace BattleshipGame.Tests
             Assert.That(result, Is.False);           
         }
 
+        [Test]
+        public void CheckSpecialCharacterDoesNotPassValidCharactersCheckMethod()
+        {
+            string comma = "*";
+            var result = PromptValidation.CheckOnlyValidCharacters(comma);
+
+            Assert.That(result, Is.False);           
+        }
+
     }
 }
