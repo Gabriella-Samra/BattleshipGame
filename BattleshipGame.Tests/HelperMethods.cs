@@ -44,6 +44,27 @@ namespace BattleshipGame.Tests
             return gameInstanceDTO;
         }
 
+        public GameInstanceDTO BasicGameSetupNOCoordinatesAssigned()
+        {
+            var gameGrid = new GameGrid();
+            var game = new Game();
+
+            var smallBoat = new Boat("Small");
+            var mediumBoat = new Boat("Medium");
+            var largeBoat = new Boat("Large");
+
+            var boatList = new List<Boat>
+            {
+                smallBoat,
+                mediumBoat,
+                largeBoat
+            };
+            
+            var gameInstanceDTO = new GameInstanceDTO(game, gameGrid, boatList);
+
+            return gameInstanceDTO;
+        }
+
         public bool IsBoatCoordinatesCountCorrect(string boat)
         {
             var helper = new HelperMethods();

@@ -127,7 +127,7 @@ namespace BattleshipGame.Tests
             var helper = new HelperMethods();
             var result = helper.IsBoatCoordinatesCountCorrect("Small");
 
-            Assert.That(result);
+            Assert.That(result, Is.True);
         }
 
         [Test]
@@ -136,7 +136,7 @@ namespace BattleshipGame.Tests
             var helper = new HelperMethods();
             var result = helper.IsBoatCoordinatesCountCorrect("Medium");
 
-            Assert.That(result);
+            Assert.That(result, Is.True);
         }
 
         [Test]
@@ -171,6 +171,51 @@ namespace BattleshipGame.Tests
                     ? null // All passed
                     : $"The test failed on iteration {failedIndex}"
             );
+        }
+
+        [Test]
+        public void MediumBoatAssignedCoordinateOffGridAndReassignedANewCoordRegressionTest()
+        {
+            var helper = new HelperMethods();
+            var gameDTO = helper.BasicGameSetupNOCoordinatesAssigned();
+
+            gameDTO.BoatList[0].BoatCoordinates.Add(new Coordinate(8, 8));
+            
+            gameDTO.BoatList[1].BoatCoordinates.Add(new Coordinate(6, 9));
+
+            var mediumBoat = gameDTO.BoatList[1];
+            var starterCoordinate = new Coordinate(6, 9);
+
+            gameDTO.Game.RemainderCoordinatesGenerator(gameDTO.GameGrid, gameDTO.BoatList, mediumBoat, starterCoordinate, "DownPath", 1);
+
+            var MediumBoatAssignedSecondCoord = gameDTO.BoatList[1].BoatCoordinates[1];
+            
+            var mediumXComponent = MediumBoatAssignedSecondCoord.X;
+            var mediumYComponent = MediumBoatAssignedSecondCoord.Y;
+
+            Console.WriteLine($"X Component is {mediumXComponent}, Y Component is {mediumYComponent}");
+
+            var result = GameGrid.IsCoordinatesOnGrid(MediumBoatAssignedSecondCoord, gameDTO.GameGrid);
+
+            Assert.That(result, Is.True);
+        }
+
+        [Test]
+        public void MediumBoatAssignedCoordinateOffGridAndItIsFlaggedAsOffGridRegressionTest()
+        {
+            var helper = new HelperMethods();
+            var gameDTO = helper.BasicGameSetupNOCoordinatesAssigned();
+
+            gameDTO.BoatList[0].BoatCoordinates.Add(new Coordinate(8, 8));
+            
+            gameDTO.BoatList[1].BoatCoordinates.Add(new Coordinate(6, 9));
+
+            var mediumBoat = gameDTO.BoatList[1];
+            var offGridCoord = new Coordinate(6, 10);
+
+            var result = GameGrid.IsCoordinatesOnGrid(offGridCoord, gameDTO.GameGrid);
+
+            Assert.That(result, Is.False);
         }
     }
 }

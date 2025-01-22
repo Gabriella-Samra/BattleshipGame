@@ -43,7 +43,7 @@ namespace BattleshipGame.Tests
                 result = false;
             }
 
-            Assert.That(result);
+            Assert.That(result, Is.True);
         }
 
         [Test]
@@ -66,7 +66,7 @@ namespace BattleshipGame.Tests
                 result = true;
             }
 
-            Assert.That(result);
+            Assert.That(result, Is.True);
         }
 
 
@@ -79,7 +79,7 @@ namespace BattleshipGame.Tests
             var coord = new Coordinate(1, 1);
             var result = GameGrid.IsCoordinatesOnGrid(coord, gameGrid);
 
-            Assert.That(result);
+            Assert.That(result, Is.True);
         }
 
         [Test]
@@ -91,7 +91,7 @@ namespace BattleshipGame.Tests
             var coord = new Coordinate(3,3);
             var result = GameGrid.IsCoordinatesOnGrid(coord, gameGrid);
 
-            Assert.That(!result);
+            Assert.That(result, Is.False);
         }
 
         [Test]

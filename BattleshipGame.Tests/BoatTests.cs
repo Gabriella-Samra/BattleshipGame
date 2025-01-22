@@ -53,7 +53,7 @@ namespace BattleshipGame.Tests
             Coordinate coordToCheck = new Coordinate(1, 1);
             var shouldBeTrue = Boat.IsCoordinateAssigned(boatList, coordToCheck);
 
-            Assert.That(shouldBeTrue);
+            Assert.That(shouldBeTrue, Is.True);
         }
 
         [Test]
@@ -74,7 +74,7 @@ namespace BattleshipGame.Tests
                 result = false;
             }
 
-            Assert.That(result);
+            Assert.That(result, Is.True);
         }
 
         [Test]
@@ -96,7 +96,7 @@ namespace BattleshipGame.Tests
                 result = false;
             }
 
-            Assert.That(!result);
+            Assert.That(result, Is.False);
         }
     }
 }

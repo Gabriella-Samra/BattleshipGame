@@ -12,7 +12,7 @@ namespace BattleshipGame.Tests
         public void CheckGeneratingACoordinateWorks()
         {
             var gameGrid = new GameGrid(2, 2); // Grid coords that should generate are (0,0), (0,1), (1,0), (1,1)
-            string result;
+            bool result;
             
             var coordinate = Coordinate.GenerateCoorindate(gameGrid);
 
@@ -20,14 +20,14 @@ namespace BattleshipGame.Tests
 
             if(IsCoordOnGrid != null) // if a coord has been found on the list then add true to the result list
             {
-                result = "true";
+                result = true;
             }
             else  // if no coord has been found on the list then add false to the result list
             {
-                result ="false";
+                result =false;
             }
 
-            Assert.That(result == "true");
+            Assert.That(result, Is.True);
         }
     }
 }

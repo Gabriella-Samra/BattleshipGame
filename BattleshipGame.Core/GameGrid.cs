@@ -39,12 +39,12 @@ namespace BattleshipGame.Core
         ///<returns>A boolean of false if either the x or y part of the coordinate is not within the confines of the gameGrid. True if the coordinate is within the bounds of the GameGrid.</returns>
         public static bool IsCoordinatesOnGrid(Coordinate coordinate, GameGrid gameGrid)
         {
-            if (coordinate.X < 0 || coordinate.X > gameGrid.XAxis )
+            if (coordinate.X < 0 || coordinate.X >= gameGrid.XAxis )
             {
                 return false;
             }
 
-            if (coordinate.Y < 0 || coordinate.Y > gameGrid.YAxis)
+            if (coordinate.Y < 0 || coordinate.Y >= gameGrid.YAxis)
             {
                 return false;
             }
