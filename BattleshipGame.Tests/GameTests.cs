@@ -209,8 +209,7 @@ namespace BattleshipGame.Tests
             gameDTO.BoatList[0].BoatCoordinates.Add(new Coordinate(8, 8));
             
             gameDTO.BoatList[1].BoatCoordinates.Add(new Coordinate(6, 9));
-
-            var mediumBoat = gameDTO.BoatList[1];
+            
             var offGridCoord = new Coordinate(6, 10);
 
             var result = GameGrid.IsCoordinatesOnGrid(offGridCoord, gameDTO.GameGrid);
