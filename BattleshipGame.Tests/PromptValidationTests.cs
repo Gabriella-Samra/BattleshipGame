@@ -23,6 +23,14 @@ namespace BattleshipGame.Tests
             Assert.That(result, Is.True);           
         }
 
-        
+        [Test]
+        public void CheckOpeningBracketPassesValidCharactersCheckMethod()
+        {
+            string comma = "(";
+            var result = PromptValidation.CheckOnlyValidCharacters(comma);
+
+            Assert.That(result, Is.True);           
+        }
+
     }
 }
