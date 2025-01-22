@@ -237,6 +237,5 @@ namespace BattleshipGame.Tests
 
             Assert.That(result, Is.EqualTo(expectedResult));
         }       
-
     }
 }

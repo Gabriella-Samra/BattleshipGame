@@ -24,7 +24,8 @@ namespace BattleshipGame.Core
 
             if (string.IsNullOrEmpty(response)) 
             {
-                throw new ArgumentNullException("Response cannot be null or empty");
+                string tryAgainString = "Invalid: ";
+                return PromptForString(tryAgainString + message);
             }
             else
             {
