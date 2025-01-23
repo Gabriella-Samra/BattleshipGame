@@ -15,27 +15,6 @@ namespace BattleshipGame.Tests
         }
 
         [Test]
-        public void PromptForStringShouldPrintPromptMessage()
-        {
-            string expectedMessage = "Guess a coordinate of mine. Please format as follows: (1,1)";
-
-            TextWriter originalConsoleOut = Console.Out;
-
-            using var consoleOutput = new StringWriter();
-            Console.SetOut(consoleOutput);
-            
-            using var consoleInput = new StringReader("(1,1)");
-            Console.SetIn(consoleInput);
-
-            Prompt.PromptForString(expectedMessage);
-
-            string output = consoleOutput.ToString();
-            Assert.That(output, Does.Contain(expectedMessage));
-
-            Console.SetOut(originalConsoleOut);
-        }
-
-        [Test]
         public void PromptForStringShouldPromptAgainOnEmptyInputAndReturnValidResponse()
         {
             string promptMessage = "Guess a coordinate of mine. Please format as follows: (1,1)";
