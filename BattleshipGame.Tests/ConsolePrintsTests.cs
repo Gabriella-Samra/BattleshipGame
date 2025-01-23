@@ -141,7 +141,7 @@ namespace BattleshipGame.Tests
         {
             bool isCoordValid = false;
             string coordinate = "(1,)";
-            string expected = $"The coordinate \"{coordinate}\" is not a valid structure. Please follow the format of (X, Y).";
+            string expected = $"The coordinate \"{coordinate}\" is not a valid structure.";
 
             var result = ConsolePrints.PrintIfCoordinateIsValidOrNot(isCoordValid, coordinate);
 

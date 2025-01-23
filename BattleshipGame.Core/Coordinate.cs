@@ -33,6 +33,13 @@ namespace BattleshipGame.Core
             return new Coordinate(xCoordinate, yCoordinate);
         }
 
+        /// <summary>
+        /// Parses a coordinate string and creates a <see cref="Coordinate"/> object from it.
+        /// </summary>
+        /// <param name="stringCoord">The coordinate string in the format "(X,Y)".</param>
+        /// <returns>
+        /// A <see cref="Coordinate"/> object with extracted X and Y values.
+        /// </returns>
         public static Coordinate CreateCoordinateFromString(string stringCoord)
         {
             int commaPosition = -1;

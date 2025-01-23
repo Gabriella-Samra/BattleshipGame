@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace BattleshipGame.Core
 {
+    /// <summary>
+    /// Handles user input prompts and returns the entered string.
+    /// </summary>
     public class Prompt
     {
         /// <summary>

@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace BattleshipGame.Core
 {
+    /// <summary>
+    /// Represents the component positions of a coordinate string in the format "(X,Y)".
+    /// </summary>
     public class CoordinateComponentPositions
     {
         /// <summary>Gets or sets the x part of the coordinate</summary>
@@ -18,7 +21,14 @@ namespace BattleshipGame.Core
         /// <summary>Gets or sets the Comma Position part of the coordinate</summary>
         public int CommaPosition { get; set; }
 
-        /// <summary>Initialises a new instance of the Coordinate Component Positions class by getting and setting the individual parts of (X,Y) values for a Coordinate</summary>
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CoordinateComponentPositions"/> class.
+        /// </summary>
+        /// <param name="x">The x-coordinate value.</param>
+        /// <param name="y">The y-coordinate value.</param>
+        /// <param name="openingBracketPosition">The position of the opening bracket.</param>
+        /// <param name="closingBracketPosition">The position of the closing bracket.</param>
+        /// <param name="commaPosition">The position of the comma.</param>
         public CoordinateComponentPositions(int x, int y, int openingBracketPosition, int closingBracketPosition, int commaPosition)
         {
             X = x;

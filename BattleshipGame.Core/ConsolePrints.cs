@@ -121,6 +121,13 @@ namespace BattleshipGame.Core
             }
         }
 
+        /// <summary>
+        /// Prints a message indicating whether the guessed coordinate hit a boat or not.
+        /// </summary>
+        /// <param name="isItAHit">A boolean value indicating if the coordinate hit a boat.</param>
+        /// <returns>
+        /// A message string indicating whether the coordinate hit a boat or missed.
+        /// </returns>
         public static string PrintIfGuessHitABoat(bool isItAHit)
         {
             if(isItAHit == false)
@@ -131,7 +138,6 @@ namespace BattleshipGame.Core
             {
                 return "The coordinate hit a boat.";
             }
-
         }
     }
 }
