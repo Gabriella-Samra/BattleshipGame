@@ -32,5 +32,37 @@ namespace BattleshipGame.Core
             
             return new Coordinate(xCoordinate, yCoordinate);
         }
+
+        public static Coordinate CreateCoordinateFromString(string stringCoord)
+        {
+            int commaPosition = -1;
+            int openingBracketPosition = -1;
+            int closingBracketPosition = -1;
+            int xComponentPosition;
+            int yComponentPosition;
+
+            for (int i = 0; i < stringCoord.Length; i++)
+            {
+                if (stringCoord[i] == ',')
+                {
+                    commaPosition = i;
+                }
+                
+                if (stringCoord[i] == '(')
+                {
+                    openingBracketPosition = i;
+                }
+
+                if (stringCoord[i] == ')')
+                {
+                    closingBracketPosition = i;
+                }                
+            }
+
+            xComponentPosition = int.Parse(stringCoord[(openingBracketPosition + 1)..commaPosition]);
+            yComponentPosition = int.Parse(stringCoord[(commaPosition + 1).. closingBracketPosition]);
+
+            return new Coordinate(xComponentPosition, yComponentPosition);
+        }
     }
 }

@@ -113,12 +113,25 @@ namespace BattleshipGame.Core
 
             if(isCoordValid == false)
             {
-                return $"The coordinate \"{coordinate}\" is not a valid structure. Please follow the format of (X, Y).";
+                return $"The coordinate \"{coordinate}\" is not a valid structure.";
             }
             else
             {
                 return $"The coordinate \"{coordinate}\" is valid.";
             }
+        }
+
+        public static string PrintIfGuessHitABoat(bool isItAHit)
+        {
+            if(isItAHit == false)
+            {
+                return "The coordinate did not hit a boat.";
+            }
+            else
+            {
+                return "The coordinate hit a boat.";
+            }
+
         }
     }
 }
