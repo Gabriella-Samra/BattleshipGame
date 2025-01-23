@@ -123,5 +123,29 @@ namespace BattleshipGame.Tests
 
             Assert.That(result, Is.EqualTo(expectedResult).Using((System.Collections.IComparer)StringComparer.Ordinal), "The generated string does not match the expected format.");
         }
+
+        [Test]
+        public void CheckIfPrintIsCorrectForCoordThatIsValid()
+        {
+            bool isCoordValid = true;
+            string coordinate = "(1,1)";
+            string expected = $"The coordinate \"{coordinate}\" is valid.";
+
+            var result = ConsolePrints.PrintIfCoordinateIsValidOrNot(isCoordValid, coordinate);
+
+            Assert.That(result, Is.EqualTo(expected));
+        }
+
+        [Test]
+        public void CheckIfPrintIsCorrectForCoordThatIsNotValid()
+        {
+            bool isCoordValid = false;
+            string coordinate = "(1,)";
+            string expected = $"The coordinate \"{coordinate}\" is not a valid structure. Please follow the format of (X, Y).";
+
+            var result = ConsolePrints.PrintIfCoordinateIsValidOrNot(isCoordValid, coordinate);
+
+            Assert.That(result, Is.EqualTo(expected));
+        }
     }
 }

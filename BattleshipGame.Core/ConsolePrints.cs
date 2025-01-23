@@ -108,16 +108,16 @@ namespace BattleshipGame.Core
         /// If the coordinate is not valid, an error message is printed suggesting the correct format.
         /// If valid, a confirmation message is printed.
         /// </remarks>
-        public static void PrintIfCoordinateIsValidOrNot(bool isCoordValid, string coordinate)
+        public static string PrintIfCoordinateIsValidOrNot(bool isCoordValid, string coordinate)
         {
 
             if(isCoordValid == false)
             {
-                Console.WriteLine($"The coordinate \"{coordinate}\" is not a valid structure. Please follow the format of (X, Y).");
+                return $"The coordinate \"{coordinate}\" is not a valid structure. Please follow the format of (X, Y).";
             }
             else
             {
-                Console.WriteLine($"The coordinate \"{coordinate}\" is valid.");
+                return $"The coordinate \"{coordinate}\" is valid.";
             }
         }
     }
