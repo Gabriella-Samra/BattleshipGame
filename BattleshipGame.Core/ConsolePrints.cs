@@ -98,5 +98,27 @@ namespace BattleshipGame.Core
 
             return result;
         }
+
+        /// <summary>
+        /// Prints a message indicating whether the provided coordinate is valid or not.
+        /// </summary>
+        /// <param name="isCoordValid">A boolean value indicating if the coordinate is valid.</param>
+        /// <param name="coordinate">The coordinate string that was validated.</param>
+        /// <remarks>
+        /// If the coordinate is not valid, an error message is printed suggesting the correct format.
+        /// If valid, a confirmation message is printed.
+        /// </remarks>
+        public static void PrintIfCoordinateIsValidOrNot(bool isCoordValid, string coordinate)
+        {
+
+            if(isCoordValid == false)
+            {
+                Console.WriteLine($"The coordinate \"{coordinate}\" is not a valid structure. Please follow the format of (X, Y).");
+            }
+            else
+            {
+                Console.WriteLine($"The coordinate \"{coordinate}\" is valid.");
+            }
+        }
     }
 }
