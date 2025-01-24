@@ -147,5 +147,27 @@ namespace BattleshipGame.Tests
 
             Assert.That(result, Is.EqualTo(expected));
         }
+
+        [Test]
+        public void CheckIfPrintIsCorrectForBoatHit()
+        {
+            bool didGuessHitBoat = true;
+            string expected = "The coordinate hit a boat.";
+
+            var result = ConsolePrints.PrintIfGuessHitABoat(didGuessHitBoat);
+
+            Assert.That(result, Is.EqualTo(expected));
+        }
+
+        [Test]
+        public void CheckIfPrintIsCorrectForBoatMiss()
+        {
+            bool didGuessHitBoat = false;
+            string expected = "The coordinate did not hit a boat.";
+
+            var result = ConsolePrints.PrintIfGuessHitABoat(didGuessHitBoat);
+
+            Assert.That(result, Is.EqualTo(expected));
+        }
     }
 }
