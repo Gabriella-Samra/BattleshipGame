@@ -236,6 +236,76 @@ namespace BattleshipGame.Tests
             bool expectedResult = false;
 
             Assert.That(result, Is.EqualTo(expectedResult));
-        }       
+        }
+
+        [Test]
+        public void CheckCorrectCoordStructurePasses()
+        {
+            string coord = "(1,1)";
+            var result = PromptValidation.ValidateCoordinateStructure(coord);
+            bool expectedResult = true;
+            
+            Assert.That(result, Is.EqualTo(expectedResult));
+        } 
+
+        [Test]
+        public void CheckNoOpeningBracketCoordStructureFails()
+        {
+            string coord = "1,1)";
+            var result = PromptValidation.ValidateCoordinateStructure(coord);
+            bool expectedResult = false;
+            
+            Assert.That(result, Is.EqualTo(expectedResult));
+        }
+
+        [Test]
+        public void CheckNoClosingBracketCoordStructureFails()
+        {
+            string coord = "(1,1";
+            var result = PromptValidation.ValidateCoordinateStructure(coord);
+            bool expectedResult = false;
+            
+            Assert.That(result, Is.EqualTo(expectedResult));
+        }
+
+        [Test]
+        public void CheckNoCommaCoordStructureFails()
+        {
+            string coord = "(11)";
+            var result = PromptValidation.ValidateCoordinateStructure(coord);
+            bool expectedResult = false;
+            
+            Assert.That(result, Is.EqualTo(expectedResult));
+        }
+
+        [Test]
+        public void CheckNoFirstNumberCoordStructureFails()
+        {
+            string coord = "(,1)";
+            var result = PromptValidation.ValidateCoordinateStructure(coord);
+            bool expectedResult = false;
+            
+            Assert.That(result, Is.EqualTo(expectedResult));
+        } 
+
+        [Test]
+        public void CheckNoSecondNumberCoordStructureFails()
+        {
+            string coord = "(1,)";
+            var result = PromptValidation.ValidateCoordinateStructure(coord);
+            bool expectedResult = false;
+            
+            Assert.That(result, Is.EqualTo(expectedResult));
+        }
+
+        [Test]
+        public void CheckNoEmptyStringCoordStructureFails()
+        {
+            string coord = "";
+            var result = PromptValidation.ValidateCoordinateStructure(coord);
+            bool expectedResult = false;
+            
+            Assert.That(result, Is.EqualTo(expectedResult));
+        }         
     }
 }
