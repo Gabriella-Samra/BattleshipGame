@@ -29,5 +29,16 @@ namespace BattleshipGame.Tests
 
             Assert.That(result, Is.True);
         }
+
+        [Test]
+        public void CheckCreateCoordinateFromStringWorksCorrectly()
+        {
+            string coord = "(1,1)";
+            var resultCoord = Coordinate.CreateCoordinateFromString(coord);
+            Coordinate expectedCoordinate = new Coordinate(1,1);
+
+            Assert.That(resultCoord.X, Is.EqualTo(expectedCoordinate.X));
+            Assert.That(resultCoord.Y, Is.EqualTo(expectedCoordinate.Y));
+        }
     }
 }
