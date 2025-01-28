@@ -24,7 +24,7 @@ namespace BattleshipGame.Tests
         }
 
         [Test]
-        public void CheckGameGridGeneratesCorrectly ()
+        public void CheckGameGridGeneratesCorrectly()
         {
             var game = new Game();
             var gameGrid = new GameGrid(2, 2);
@@ -47,7 +47,7 @@ namespace BattleshipGame.Tests
         }
 
         [Test]
-        public void CheckGameGridGeneratesDoesNotIncludeCoordsItShouldNotHaveOnGrid ()
+        public void CheckGameGridGeneratesDoesNotIncludeCoordsItShouldNotHaveOnGrid()
         {
             var game = new Game();
             var gameGrid = new GameGrid(2, 2);
@@ -71,7 +71,7 @@ namespace BattleshipGame.Tests
 
 
         [Test]
-        public void CheckCoordinateOnGridMethodWorks ()
+        public void CheckCoordinateOnGridMethodWorks()
         {
             var game = new Game();
             var gameGrid = new GameGrid(2, 2);
@@ -83,7 +83,7 @@ namespace BattleshipGame.Tests
         }
 
         [Test]
-        public void CheckCoordinateNOTOnGridMethodWorks ()
+        public void CheckCoordinateNOTOnGridMethodWorks()
         {
             var game = new Game();
             var gameGrid = new GameGrid(2, 2);
@@ -95,7 +95,7 @@ namespace BattleshipGame.Tests
         }
 
         [Test]
-        public void CheckSmallBoatCoordIsAddedToGameGrid ()
+        public void CheckSmallBoatCoordIsAddedToGameGrid()
         {
             var helper = new HelperMethods();
             var game = helper.BasicGameSetup();
@@ -107,6 +107,23 @@ namespace BattleshipGame.Tests
             int boatLocation = newGameGrid.GridCoordinates.FindIndex(coord => coord is StringCoordinate stringCoord && stringCoord.BoatCode == "S,B");
             
             Is.EqualTo(index == boatLocation);
+        }
+
+        [Test]
+        public void CheckHitIsAddedToGameGridCorrectly()
+        {
+            var helper = new HelperMethods();
+            var game = helper.BasicGameSetup();
+
+            Coordinate coordofHit = new Coordinate(1, 1);
+
+            game.BoatList[0].BoatCoordinates.Add(coordofHit);
+            int index = game.GameGrid.GridCoordinates.FindIndex(gridCoord => gridCoord.X == 1 && gridCoord.Y == 1);
+            var newGameGrid = GameGrid.UpdateGameGridWithHits(game.GameGrid, coordofHit);
+
+            int hitLocation = newGameGrid.GridCoordinates.FindIndex(coord => coord is StringCoordinate stringCoord && stringCoord.BoatCode == " X ");
+            
+            Is.EqualTo(index == hitLocation);
         }
     }
 }
