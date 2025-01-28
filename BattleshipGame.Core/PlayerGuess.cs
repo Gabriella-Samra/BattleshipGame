@@ -16,6 +16,27 @@ namespace BattleshipGame.Core
     /// </remarks>
     public class PlayerGuess
     {
+        public static GameGrid PlayerGuessRequestLoop(GameGrid gameGrid, List<Boat> boatList)
+        {
+            var coordinateGuess = PlayerGuess.AskForAGuess();   
+            var coordinate = Coordinate.CreateCoordinateFromString(coordinateGuess);
+            var isCoordAssigned = PlayerGuess.CheckIfGuessHitABoat(boatList, coordinate);
+            Console.WriteLine(ConsolePrints.PrintIfGuessHitABoat(isCoordAssigned));
+
+            if (isCoordAssigned == true)
+            {
+                gameGrid = GameGrid.UpdateGameGridWithHits(gameGrid, coordinate);
+            }
+
+            if(isCoordAssigned == false)
+            {
+                Console.WriteLine("You missed my boat, please try again");
+                PlayerGuessRequestLoop(gameGrid, boatList);
+            } 
+
+            return gameGrid;
+        } 
+
         /// <summary>
         /// Handles the player's coordinate guess input and validation.
         /// </summary>
@@ -51,10 +72,9 @@ namespace BattleshipGame.Core
         /// <returns>
         /// <c>true</c> if the guess matches any boat's coordinate; otherwise, <c>false</c>.
         /// </returns>
-        public static bool CheckIfGuessHitABoat(List<Boat> boatList, string playerGuess)
+        public static bool CheckIfGuessHitABoat(List<Boat> boatList, Coordinate playerGuess)
         {
-            var coordinate = Coordinate.CreateCoordinateFromString(playerGuess);
-            var isCoordAssigned = Boat.IsCoordinateAssigned(boatList, coordinate);
+            var isCoordAssigned = Boat.IsCoordinateAssigned(boatList, playerGuess);
 
             return isCoordAssigned;
         }

@@ -31,9 +31,8 @@ namespace BattleshipGame.Core
             GameGrid.UpdateGameGridWithBoats(gameGrid, boatList);
             Console.WriteLine($"{ConsolePrints.UpdatesWithBoatGridPrint(gameGrid)}");
 
-            var coordinateGuess = PlayerGuess.AskForAGuess();   
-            var isCoordAssigned = PlayerGuess.CheckIfGuessHitABoat(boatList, coordinateGuess);
-            Console.WriteLine(ConsolePrints.PrintIfGuessHitABoat(isCoordAssigned));         
+            gameGrid = PlayerGuess.PlayerGuessRequestLoop(gameGrid, boatList);
+            Console.WriteLine($"{ConsolePrints.UpdatesWithBoatGridPrint(gameGrid)}");
         }
         
         /// <summary>The starter method for setting coordinates for all 3 boats that belong to the computer. 1 coord for small, 2 for medium, and 3 for large boats.</summary>

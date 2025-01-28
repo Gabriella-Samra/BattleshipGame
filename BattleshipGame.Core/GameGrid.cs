@@ -82,5 +82,17 @@ namespace BattleshipGame.Core
             return gameGrid;
         }
 
+        public static GameGrid UpdateGameGridWithHits(GameGrid gameGrid, Coordinate coordThatIsAHit)
+        {
+            
+            int index = gameGrid.GridCoordinates.FindIndex(gridCoord => gridCoord.X == coordThatIsAHit.X && gridCoord.Y == coordThatIsAHit.Y);
+
+            if (index != -1) // Coordinate found
+            {
+                gameGrid.GridCoordinates[index] = new StringCoordinate(coordThatIsAHit.X, coordThatIsAHit.Y, " X ");
+            }
+            
+            return gameGrid;
+        }
     }
 }
