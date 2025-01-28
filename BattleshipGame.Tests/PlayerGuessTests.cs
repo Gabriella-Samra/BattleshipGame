@@ -22,9 +22,9 @@ namespace BattleshipGame.Tests
 
             gameInstanceDTO.BoatList[1].BoatCoordinates.Add(new Coordinate(1,1));
 
-            string playerGuess = "(1,1)";
+            Coordinate playerGuess = new Coordinate(1,1);
 
-            var result = PlayerGuess.CheckIfGuessHitABoat(gameInstanceDTO.BoatList, playerGuess);
+            var result = PlayerGuess.CheckIfGuessHitABoat(gameInstanceDTO.BoatList, );
             bool expected = true;
 
             Assert.That(result, Is.EqualTo(expected));
@@ -38,7 +38,7 @@ namespace BattleshipGame.Tests
 
             gameInstanceDTO.BoatList[1].BoatCoordinates.Add(new Coordinate(1,1));
 
-            string playerGuess = "(2,1)";
+            Coordinate playerGuess = new Coordinate(2,1);
 
             var result = PlayerGuess.CheckIfGuessHitABoat(gameInstanceDTO.BoatList, playerGuess);
             bool expected = false;
