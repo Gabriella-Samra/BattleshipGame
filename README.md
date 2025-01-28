@@ -9,6 +9,7 @@ A recreation of the classic Battleship game in C#, starting with a terminal-base
   - [Version 1 (V1)](#version-1-v1)
   - [Version 2 (V2)](#version-2-v2)
   - [Version 3 (V3)](#version-3-v3)
+  - [Version 4 (V4)](#version-4-v4)
   - [Future Plans](#future-plans)
 
 ## About the Project
@@ -33,10 +34,17 @@ BattleshipGame is a C# implementation of the classic Battleship game. The projec
 - **Status:**
 In Progress
 - **Features:**
-  - Basic gameplay with random ship placement.
-  - The computer makes random guesses for the player's ship locations.
-- **Goal:** Establish the core mechanics of the game in a terminal environment.
+  - Basic gameplay with random ship placement of computer boats
+  - Player can guess all ship locations
+- **Goal:** Establish the core mechanics of the game for computer only boats and player only guesses
 ### Version 2 (V2)
+- **Status:**
+Not Started
+- **Features:**
+  - Basic gameplay with random ship placement of computer and asks player for location of their boats
+  - The computer makes random guesses for the player's ship locations.
+- **Goal:** Establish the core mechanics of the board game in a terminal environment.
+### Version 3 (V3)
 - **Status:**
 Not Started
 - **Features:**
@@ -44,7 +52,7 @@ Not Started
   - If the computer hits a ship at a coordinate (e.g., A3), it will next guess adjacent cells (e.g., A4), assuming the ship may occupy multiple spaces.
   - Enhanced user experience with additional feedback and messages.
 - **Goal:** Increase the difficulty and realism of the computer opponent.
-### Version 3 (V3)
+### Version 4 (V4)
 - **Status:**
 Not Started
 - **Features:**
