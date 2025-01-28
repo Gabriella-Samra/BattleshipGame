@@ -31,9 +31,9 @@ namespace BattleshipGame.Core
         /// </remarks>
         public static GameGrid PlayerGuessRequestLoop(GameGrid gameGrid, List<Boat> boatList)
         {
-            var coordinateGuess = PlayerGuess.AskForAGuess();   
+            var coordinateGuess = AskForAGuess();   
             var coordinate = Coordinate.CreateCoordinateFromString(coordinateGuess);
-            var isCoordAssigned = PlayerGuess.CheckIfGuessHitABoat(boatList, coordinate);
+            var isCoordAssigned = CheckIfGuessHitABoat(boatList, coordinate);
             Console.WriteLine(ConsolePrints.PrintIfGuessHitABoat(isCoordAssigned));
 
             if (isCoordAssigned == true)
