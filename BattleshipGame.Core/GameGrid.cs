@@ -82,6 +82,17 @@ namespace BattleshipGame.Core
             return gameGrid;
         }
 
+        /// <summary>
+        /// Updates the game grid to reflect a hit at the specified coordinate.
+        /// </summary>
+        /// <param name="gameGrid">The current game grid to be updated.</param>
+        /// <param name="coordThatIsAHit">The coordinate where the hit occurred.</param>
+        /// <returns>
+        /// The updated game grid with the hit marked at the specified coordinate.
+        /// </returns>
+        /// <remarks>
+        /// If the coordinate exists in the grid, it is replaced with a special marker indicating a hit.
+        /// </remarks>
         public static GameGrid UpdateGameGridWithHits(GameGrid gameGrid, Coordinate coordThatIsAHit)
         {
             

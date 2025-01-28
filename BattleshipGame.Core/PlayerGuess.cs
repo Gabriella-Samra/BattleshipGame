@@ -16,6 +16,19 @@ namespace BattleshipGame.Core
     /// </remarks>
     public class PlayerGuess
     {
+
+        /// <summary>
+        /// Handles the player's guessing loop for the Battleship game and updates the game grid accordingly.
+        /// </summary>
+        /// <param name="gameGrid">The current game grid to update based on the player's guess.</param>
+        /// <param name="boatList">The list of boats to check against for hits.</param>
+        /// <returns>
+        /// The updated game grid after processing the player's guess.
+        /// </returns>
+        /// <remarks>
+        /// This method recursively prompts the player for a valid coordinate guess, checks if it hits a boat, 
+        /// updates the grid if it is a hit, and repeats the process if it is a miss.
+        /// </remarks>
         public static GameGrid PlayerGuessRequestLoop(GameGrid gameGrid, List<Boat> boatList)
         {
             var coordinateGuess = PlayerGuess.AskForAGuess();   
