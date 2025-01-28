@@ -31,24 +31,50 @@ namespace BattleshipGame.Core
         /// </remarks>
         public static GameGrid PlayerGuessRequestLoop(GameGrid gameGrid, List<Boat> boatList)
         {
-            var coordinateGuess = AskForAGuess();   
-            var coordinate = Coordinate.CreateCoordinateFromString(coordinateGuess);
-            var isCoordAssigned = CheckIfGuessHitABoat(boatList, coordinate);
-            Console.WriteLine(ConsolePrints.PrintIfGuessHitABoat(isCoordAssigned));
+            // TODO: This executes if you make the same guess as before. Obvs don't want that.
+            int countOfBoatCoordinates = 0;
 
-            if (isCoordAssigned == true)
+            foreach (Boat boat in boatList)
             {
-                gameGrid = GameGrid.UpdateGameGridWithHits(gameGrid, coordinate);
+                countOfBoatCoordinates += boat.BoatCoordinates.Count;
+                Console.WriteLine($"The number of boat coordinates still to guess is {countOfBoatCoordinates}");
             }
 
-            if(isCoordAssigned == false)
-            {
-                Console.WriteLine("You missed my boat, please try again");
-                PlayerGuessRequestLoop(gameGrid, boatList);
-            } 
-
+            gameGrid = KeepAskingForGuessesIfNeeded(countOfBoatCoordinates, boatList, gameGrid);
+            
             return gameGrid;
         } 
+
+        public static GameGrid KeepAskingForGuessesIfNeeded(int countOfBoatCoordinates, List<Boat> boatList, GameGrid gameGrid)
+        {
+            while (countOfBoatCoordinates > 0)
+            {
+                var coordinateGuess = AskForAGuess();   
+                var coordinate = Coordinate.CreateCoordinateFromString(coordinateGuess);
+                var isCoordAssigned = CheckIfGuessHitABoat(boatList, coordinate);
+                Console.WriteLine(ConsolePrints.PrintIfGuessHitABoat(isCoordAssigned));
+
+                if (isCoordAssigned == true)
+                {
+                    gameGrid = GameGrid.UpdateGameGridWithHits(gameGrid, coordinate);
+                    countOfBoatCoordinates--;
+                    Console.WriteLine($"{ConsolePrints.UpdatesWithBoatGridPrint(gameGrid)}");
+                    Console.WriteLine($"The number of boat coordinates still to guess is {countOfBoatCoordinates}");
+
+                    if(countOfBoatCoordinates == 0)
+                    {
+                        Console.WriteLine("Congratulations! You have found and hit all my boats!! You Won!");
+                    }
+                }
+
+                else
+                {
+                    Console.WriteLine("You missed my boat, please try again");
+                } 
+            }
+
+            return gameGrid;
+        }
 
         /// <summary>
         /// Handles the player's coordinate guess input and validation.
