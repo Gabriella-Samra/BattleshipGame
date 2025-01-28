@@ -24,7 +24,7 @@ namespace BattleshipGame.Tests
 
             Coordinate playerGuess = new Coordinate(1,1);
 
-            var result = PlayerGuess.CheckIfGuessHitABoat(gameInstanceDTO.BoatList, );
+            var result = PlayerGuess.CheckIfGuessHitABoat(gameInstanceDTO.BoatList, playerGuess);
             bool expected = true;
 
             Assert.That(result, Is.EqualTo(expected));
