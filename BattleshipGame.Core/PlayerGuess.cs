@@ -16,18 +16,18 @@ namespace BattleshipGame.Core
     /// </remarks>
     public class PlayerGuess
     {
-
         /// <summary>
         /// Handles the player's guessing loop for the Battleship game and updates the game grid accordingly.
         /// </summary>
-        /// <param name="gameGrid">The current game grid to update based on the player's guess.</param>
+        /// <param name="gameGrid">The current game grid to update based on the player's guesses.</param>
         /// <param name="boatList">The list of boats to check against for hits.</param>
         /// <returns>
-        /// The updated game grid after processing the player's guess.
+        /// The updated game grid after processing the player's guesses.
         /// </returns>
         /// <remarks>
-        /// This method recursively prompts the player for a valid coordinate guess, checks if it hits a boat, 
-        /// updates the grid if it is a hit, and repeats the process if it is a miss.
+        /// This method calculates the total number of boat coordinates that need to be guessed, 
+        /// and repeatedly prompts the player for valid coordinate guesses until all boat coordinates have been hit. 
+        /// It relies on the <see cref="KeepAskingForGuessesIfNeeded"/> method to handle the guessing loop.
         /// </remarks>
         public static GameGrid PlayerGuessRequestLoop(GameGrid gameGrid, List<Boat> boatList)
         {
@@ -45,6 +45,22 @@ namespace BattleshipGame.Core
             return gameGrid;
         } 
 
+        /// <summary>
+        /// Repeatedly prompts the player for guesses until all boat coordinates are hit.
+        /// </summary>
+        /// <param name="countOfBoatCoordinates">
+        /// The total number of boat coordinates remaining to be guessed.
+        /// </param>
+        /// <param name="boatList">The list of boats to check against for hits.</param>
+        /// <param name="gameGrid">The current game grid to update with hits as they occur.</param>
+        /// <returns>
+        /// The updated game grid after processing the player's guesses.
+        /// </returns>
+        /// <remarks>
+        /// This method continuously prompts the player to guess coordinates. If a guessed coordinate hits a boat, 
+        /// it is marked as a hit on the game grid and the remaining count of boat coordinates decreases. 
+        /// If all coordinates are successfully guessed, the player wins the game.
+        /// </remarks>
         public static GameGrid KeepAskingForGuessesIfNeeded(int countOfBoatCoordinates, List<Boat> boatList, GameGrid gameGrid)
         {
             while (countOfBoatCoordinates > 0)
