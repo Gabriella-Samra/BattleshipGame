@@ -36,7 +36,8 @@ namespace BattleshipGame.Core
         }
 
         /// <summary>
-        /// 
+        /// Joins all the grid coordinates for the given gameGrid and places them into a format to make the output look like a grid.
+        /// This will print the Boat locations instead of coordinates eg. S,B for small boat.
         /// </summary>
         /// <param name="gameGrid"></param>
         /// <returns></returns>
