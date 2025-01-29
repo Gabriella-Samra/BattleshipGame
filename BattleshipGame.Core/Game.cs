@@ -44,8 +44,6 @@ namespace BattleshipGame.Core
                 var numberOfCoordinatesStillNeeded = boat.BoatLength();
                 CoordinateAssignmentLoop(gameGrid, boatList, numberOfCoordinatesStillNeeded,  boat);
             }
-
-            Console.WriteLine($"{ConsolePrints.PrintBoatList(boatList)}");
         }
 
         /// <summary>

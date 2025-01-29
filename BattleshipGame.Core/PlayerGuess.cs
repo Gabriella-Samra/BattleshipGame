@@ -37,8 +37,9 @@ namespace BattleshipGame.Core
             foreach (Boat boat in boatList)
             {
                 countOfBoatCoordinates += boat.BoatCoordinates.Count;
-                Console.WriteLine($"The number of boat coordinates still to guess is {countOfBoatCoordinates}");
             }
+            
+            Console.WriteLine($"The number of boat coordinates still to guess is {countOfBoatCoordinates}");
 
             gameGrid = KeepAskingForGuessesIfNeeded(countOfBoatCoordinates, boatList, gameGrid);
             
@@ -87,7 +88,9 @@ namespace BattleshipGame.Core
 
                 else
                 {
+                    gameGrid = GameGrid.UpdateGameGridWithMisses(gameGrid, coordinate);
                     Console.WriteLine("You missed my boat, please try again");
+                    Console.WriteLine($"{ConsolePrints.UpdatesWithBoatGridPrint(gameGrid)}");
                 } 
             }
 
@@ -110,7 +113,6 @@ namespace BattleshipGame.Core
             Console.WriteLine("Okay, checking");
             
             bool isItACoord = PromptValidation.ValidateCoordinateStructure(guess);
-            Console.WriteLine(ConsolePrints.PrintIfCoordinateIsValidOrNot(isItACoord, guess));
 
             if (isItACoord == false)
             {
@@ -122,11 +124,6 @@ namespace BattleshipGame.Core
             {
                 var coordinate = Coordinate.CreateCoordinateFromString(guess);
                 bool wasCoordAddedToList = guessedCoordinates.Add(coordinate);
-                Console.WriteLine($"Was {guess} added again? {wasCoordAddedToList}");
-                foreach (var coord in guessedCoordinates)
-                {
-                    Console.WriteLine($"({coord.X}, {coord.Y})");
-                }
 
                 if (wasCoordAddedToList == false)
                 {

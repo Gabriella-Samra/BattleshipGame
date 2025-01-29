@@ -105,5 +105,29 @@ namespace BattleshipGame.Core
             
             return gameGrid;
         }
+
+        /// <summary>
+        /// Updates the game grid to reflect a hit at the specified coordinate.
+        /// </summary>
+        /// <param name="gameGrid">The current game grid to be updated.</param>
+        /// <param name="coordThatIsAHit">The coordinate where the hit occurred.</param>
+        /// <returns>
+        /// The updated game grid with the hit marked at the specified coordinate.
+        /// </returns>
+        /// <remarks>
+        /// If the coordinate exists in the grid, it is replaced with a special marker indicating a hit.
+        /// </remarks>
+        public static GameGrid UpdateGameGridWithMisses(GameGrid gameGrid, Coordinate coordThatIsAHit)
+        {
+            
+            int index = gameGrid.GridCoordinates.FindIndex(gridCoord => gridCoord.X == coordThatIsAHit.X && gridCoord.Y == coordThatIsAHit.Y);
+
+            if (index != -1) // Coordinate found
+            {
+                gameGrid.GridCoordinates[index] = new StringCoordinate(coordThatIsAHit.X, coordThatIsAHit.Y, " ~ ");
+            }
+            
+            return gameGrid;
+        }
     }
 }
