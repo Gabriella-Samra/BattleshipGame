@@ -102,7 +102,7 @@ namespace BattleshipGame.Core
         /// </returns>
         /// <remarks>
         /// This method prompts the user for a coordinate input, validates its structure, 
-        /// and asks again if the format is invalid.
+        /// asks again if the format is invalid, and asks again if the guess has already been made
         /// </remarks>
         public static string AskForAGuess(HashSet<Coordinate> guessedCoordinates)
         {
